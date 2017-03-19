@@ -9,6 +9,7 @@
     "express-handlebars": "^3.0.0",
     "mysql": "^2.13.0",
     "path": "^0.12.7",
+    "petfinder": "^0.1.1",
     "sequelize": "^3.30.2"
   },
   "devDependencies": {
