@@ -29,7 +29,7 @@ Use an existing public dataset to power the database
 
 Create a migration strategy for sharing data across teammembers.
 
-       <h3>Day 1</h3>  
+       <h2> Day 1 Group Project Sequlizer CRUD, MVC  </h2>  
 <ul>
 <li>Set up Server</li>
 <li>Created API and HTML routes</li>
