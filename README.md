@@ -12,7 +12,7 @@ Must incorporate Basic Testing Framework
 
 Must be deployed using Heroku (with Data)
 
-Must utilize at least one new library, package, or technology that we haven’t discussed
+Must utilize at least one new library, package, or technology that we havenï¿½t discussed
 
 Must have a polished frontend / UI 
 
@@ -28,3 +28,12 @@ Incorporate Authentication (JSON Web Tokens, Sessions, Etc.)
 Use an existing public dataset to power the database
 
 Create a migration strategy for sharing data across teammembers.
+
+       <h3>Day 1</h3>  
+<ul>
+<li>Set up Server</li>
+<li>Created API and HTML routes</li>
+<li>SetUp handlebars</li>
+<li>Login/SignUp/main pages</li>
+<li>Everything returns JSON</li>
+</ul>
