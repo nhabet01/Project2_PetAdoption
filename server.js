@@ -9,7 +9,7 @@ var path = require('path')
 var app = express();
 var PORT = process.env.PORT || 8080;
 
-app.use(methodOverride('_method'))
+// app.use(methodOverride('_method'))//nh: duplicate below
     // Requiring our models for syncing
 var db = require("./models");
 
@@ -28,7 +28,7 @@ app.set("view engine", "handlebars");
 
 // Routes =============================================================
 const HTMLRouter = require("./routes/html-routes.js")
-const APIRoutes = require("./routes/api-routes.js")
+const APIRoutes = require("./routes/api-routes.js")//nh: shouldn't this be required first?
 
 app.use('/', HTMLRouter)
     // app.use('/', APIRoutes)
