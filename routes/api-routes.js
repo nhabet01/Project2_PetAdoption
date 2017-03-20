@@ -14,7 +14,7 @@ const API = {
                 let data = []
                 for (var i = 0; i < breeds.length; i++) {
 
-                    if (breeds[i].contact.address1 && breeds[i].contact.email) {
+                    if (breeds[i].contact.address1 && breeds[i].contact.email && breeds[i].media.photos['1']) {
                         // console.log(breeds[i].sex)
                         // console.log(breeds[i].age)
                         // console.log(breeds[i].shelterId)
@@ -25,7 +25,7 @@ const API = {
                         // console.log(`_______Picture ${i}___________`)
                         // console.log(breeds[i].media.photos['1'].x)
                         // console.log(`_______NEXT PET ${i}___________`)
-                        console.log(breeds[i].contact.address1)
+                        console.log(breeds[i].media.photos['1'].x)
                         let pet = {
                             petPicture: breeds[i].media.photos['1'].x,
                             descriptsion: breeds[i].description,
