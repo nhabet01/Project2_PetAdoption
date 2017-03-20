@@ -37,3 +37,13 @@ Create a migration strategy for sharing data across teammembers.
 <li>Login/SignUp/main pages</li>
 <li>Everything returns JSON</li>
 </ul>
+
+# Day 2 Group Project Sequlizer CRUD, MVC
+
+<ul>
+<li>Set up Forms on INPUT with methods override</li>
+<li>Set API call and return to HTML (with handlebars)</li>
+<li>Set up (ify statements for parameters for API)</li>
+<li>Call Back on API => render => Handlebars</li>
+<li>In Need of DB and beginning of the front end</li>
+</ul>
