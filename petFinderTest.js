@@ -5,8 +5,9 @@ var petfinder = require('petfinder')('357d4a946c3d94988341843dbe6abed5', '6b28ab
 //   console.log(breeds)
 // });
 
-
-petfinder.findPet('28105', { animal: 'cat', age: 'Adult', size: 'M' }, function(err, breeds) {
+// animal = barnyard, bird, cat, dog, horse, pig, reptile, smallfurry
+// age: 'Adult', or Baby
+petfinder.findPet('28105', { animal: 'cat', size: 'M' }, function(err, breeds) {
     for (var i = 0; i < breeds.length; i++) {
         console.log(breeds[i].sex)
         console.log(breeds[i].age)

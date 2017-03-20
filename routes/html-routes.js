@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-
-// Routes
-// =============================================================
+const api = require("./api-routes.js")
+    // Routes
+    // =============================================================
 
 
 router.get('/', (req, res) => {
@@ -31,6 +31,29 @@ router.get('/login', (req, res) => {
     res.render('login', data);
 
 });
+
+router.get('/search', (req, res) => {
+    var data = {
+        hello: ' World'
+    }
+    res.render('animalSearch', data);
+
+});
+
+router.post('/search', (req, res) => {
+
+    // console.log(req.body)
+    api.findAminals(req.body, function(data) {
+        console.log('FUNN')
+            // console.log(data)
+        res.render('petsOnSearch', { pets: data });
+    })
+
+
+});
+
+
+
 
 
 
