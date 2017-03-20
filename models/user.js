@@ -1,4 +1,4 @@
-module.exports = function(sequelize,DataTypes){
+module.exports = function(sequelize, DataTypes) {
     var User = sequelize.define("user", {
         //sequelize automatically adds ID as primary key and auto increments
         firstName: {
@@ -12,9 +12,9 @@ module.exports = function(sequelize,DataTypes){
         },
         password: {
             type: DataTypes.STRING
-        }
+        },
         //This can be generated using javascript/jQuery from a combination of user inputs and sign-up
-        AcctName: {
+        acctName: {
             type: DataTypes.STRING
         },
         email: {
@@ -39,13 +39,13 @@ module.exports = function(sequelize,DataTypes){
         //Will convert this to a range (Integer) later but sticking to A, Y, X for now.
         Spref: {
             type: DataTypes.STRING
-        }
+        },
         Gpref: {
             type: DataTypes.STRING
         }
 
 
-    },{
+    }, {
         //don't think we want/need to record timestamps for anything.
         timestamps: false
     });
