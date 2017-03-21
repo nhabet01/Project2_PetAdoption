@@ -1,38 +1,39 @@
 {
-  "name": "project2_petadoption",
-  "version": "1.0.0",
-  "description": "Coding Requirements\r Must use a Node and Express Web Server",
-  "main": "index.js",
-  "dependencies": {
-    "body-parser": "^1.17.1",
-    "express": "^4.15.2",
-    "express-handlebars": "^3.0.0",
-    "mysql": "^2.13.0",
-    "path": "^0.12.7",
-    "petfinder": "^0.1.1",
-    "sequelize": "^3.30.2"
-  },
-  "devDependencies": {
-    "method-override": "^2.3.7"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/nhabet01/Project2_PetAdoption.git"
-  },
-  "keywords": [
-    "node",
-    "express",
-    "sequelize",
-    "body",
-    "parser"
-  ],
-  "author": "nhabet01",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/nhabet01/Project2_PetAdoption/issues"
-  },
-  "homepage": "https://github.com/nhabet01/Project2_PetAdoption#readme"
+    "name": "project2_petadoption",
+    "version": "1.0.0",
+    "description": "Coding Requirements\r Must use a Node and Express Web Server",
+    "main": "index.js",
+    "dependencies": {
+        "bcrypt": "^1.0.2",
+        "body-parser": "^1.17.1",
+        "express": "^4.15.2",
+        "express-handlebars": "^3.0.0",
+        "mysql": "^2.13.0",
+        "path": "^0.12.7",
+        "petfinder": "^0.1.1",
+        "sequelize": "^3.30.2"
+    },
+    "devDependencies": {
+        "method-override": "^2.3.7"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/nhabet01/Project2_PetAdoption.git"
+    },
+    "keywords": [
+        "node",
+        "express",
+        "sequelize",
+        "body",
+        "parser"
+    ],
+    "author": "nhabet01",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/nhabet01/Project2_PetAdoption/issues"
+    },
+    "homepage": "https://github.com/nhabet01/Project2_PetAdoption#readme"
 }
