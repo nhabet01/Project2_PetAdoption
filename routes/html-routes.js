@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const api = require("./api-routes.js")
+const db = require("../models/")
     // Routes
     // =============================================================
 
@@ -36,6 +37,20 @@ router.post("/signup", function(req, res) {
     console.log('SIGNUP')
 
     console.log(req.body)
+        //this will go to our db 
+    db.user.create({
+        name: req.body.name,
+        username: req.body.username,
+        password: req.body.password,
+        email: req.body.email
+
+
+    }).then(function(data) {
+
+        var data = { data: data }
+        res.render('animalSearch', data)
+    })
+
 
 });
 
