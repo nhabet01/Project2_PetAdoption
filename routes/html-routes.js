@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const api = require("./api-routes.js")
-const db = require("../models/")
+const api = require("./api-routes.js");
+const db = require("../models/");
+var bcrypt = require("bcrypt");
     // Routes
     // =============================================================
 
@@ -35,20 +36,32 @@ router.get('/login', (req, res) => {
 
 router.post("/signup", function(req, res) {
     console.log('SIGNUP')
+    //Default saltRounds is 10 but the higher that number the more computaionally costly; will set lower for dev purposes.
+    const saltRounds = 4;
+    // const myPlaintextPassword = req.body.password;
+    var mypassword;
+    bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+    mypassword = hash;
+    });
 
-    console.log(req.body)
+    // console.log(req.body)
+
         //this will go to our db 
-    db.user.create({
+    db.user.create({//nh why does "user" have to be lowercase? in a similar example for in class exercises we used db.Post and db.Books.create
         name: req.body.name,
         username: req.body.username,
-        password: req.body.password,
+        password: mypassword,
         email: req.body.email
 
 
     }).then(function(data) {
 
         var data = { data: data }
+        // console.log("data");
+        // console.log(data);
         res.render('animalSearch', data)
+        //above should render the animalSearch handlebars and it does, but the address is still "signup" in the browser addressbar
+        //also, data is not being rendered on that page (don't think it should if data = user signup info)
     })
 
 
