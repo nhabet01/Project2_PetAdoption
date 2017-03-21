@@ -1,2 +1,2 @@
-CREATE DATABASE 'petfinders_db';
-USE petfinders_db;
+CREATE DATABASE pets_development;
+USE pets_development;
