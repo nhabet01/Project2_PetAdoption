@@ -5,13 +5,16 @@ var petfinder = require('petfinder')('357d4a946c3d94988341843dbe6abed5', '6b28ab
 const API = {
 
         findAminals: (params, cb) => {
+            console.log('PARAMS')
             console.log(params);
-            let animalType = params.animalType.toLowerCase();
-            let animalAge = params.animalAge;
-            let animalSex = params.animalSex.slice(0, 1);
+            let animalType = params.animal.toLowerCase();
+            let animalAge = params.age; 
+            let animalSex = params.gender.slice(0,1);
             let zip = params.zip;
+                    console.log(animalType,animalAge,animalSex,zip)
+            petfinder.findPet(zip, {animal: animalType, sex: animalSex, age: animalAge, size: 'M' }, function(err, breeds) {
 
-            petfinder.findPet(zip, { animal: animalType, sex: animalSex, age: animalAge, size: 'M' }, function(err, breeds) {
+
                 let data = []
                 for (var i = 0; i < breeds.length; i++) {
 
@@ -26,7 +29,7 @@ const API = {
                         // console.log(`_______Picture ${i}___________`)
                         // console.log(breeds[i].media.photos['1'].x)
                         // console.log(`_______NEXT PET ${i}___________`)
-                        console.log(breeds[i].media.photos['1'].x)
+                        // console.log(breeds[i].media.photos['1'].x)
                         let pet = {
                             petPicture: breeds[i].media.photos['1'].x,
                             descriptsion: breeds[i].description,
@@ -44,27 +47,5 @@ const API = {
 
         }
     }
-    // router.post("/signup", function(req, res) {
-    //     console.log('SIGNUP')
 
-//     console.log(req.body)
-
-// });
-
-// router.post("/login", function(req, res) {
-//     console.log('LOGIN')
-
-//     console.log(req.body)
-
-// });
-
-
-
-// router.post("/search", function(req, res) {
-
-//     console.log(req.body)
-
-// });
-
-
-module.exports = API;
+    module.exports = API;
