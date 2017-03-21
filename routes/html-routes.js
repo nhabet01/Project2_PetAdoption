@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const api = require("./api-routes.js")
+const db = require("../models/")
     // Routes
     // =============================================================
 
@@ -32,6 +33,44 @@ router.get('/login', (req, res) => {
 
 });
 
+router.post("/signup", function(req, res) {
+    console.log('SIGNUP')
+
+    console.log(req.body)
+        //this will go to our db 
+    db.user.create({
+        name: req.body.name,
+        username: req.body.username,
+        password: req.body.password,
+        email: req.body.email
+
+
+    }).then(function(data) {
+
+        var data = { data: data }
+        res.render('animalSearch', data)
+    })
+
+
+});
+
+router.post("/login", function(req, res) {
+    console.log('LOGIN')
+
+    console.log(req.body)
+
+});
+
+
+// router.get('/post', (req, res) => {
+//     console.log(req.body)
+//         // var data = {
+//         //     hello: ' World'
+//         // }
+//         // res.render('login', data);
+
+// });
+
 router.get('/search', (req, res) => {
     var data = {
         hello: ' World'
@@ -41,8 +80,8 @@ router.get('/search', (req, res) => {
 });
 
 router.post('/search', (req, res) => {
-
-    // console.log(req.body)
+    console.log('BODY')
+    console.log(req.body)
     api.findAminals(req.body, function(data) {
         console.log('FUNN')
             // console.log(data)
