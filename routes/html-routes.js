@@ -32,6 +32,30 @@ router.get('/login', (req, res) => {
 
 });
 
+router.post("/signup", function(req, res) {
+    console.log('SIGNUP')
+
+    console.log(req.body)
+
+});
+
+router.post("/login", function(req, res) {
+    console.log('LOGIN')
+
+    console.log(req.body)
+
+});
+
+
+// router.get('/post', (req, res) => {
+//     console.log(req.body)
+//         // var data = {
+//         //     hello: ' World'
+//         // }
+//         // res.render('login', data);
+
+// });
+
 router.get('/search', (req, res) => {
     var data = {
         hello: ' World'
@@ -41,8 +65,8 @@ router.get('/search', (req, res) => {
 });
 
 router.post('/search', (req, res) => {
-
-    // console.log(req.body)
+    console.log('BODY')
+    console.log(req.body)
     api.findAminals(req.body, function(data) {
         console.log('FUNN')
             // console.log(data)
