@@ -62,3 +62,9 @@ Create a migration strategy for sharing data across teammembers.
 <li>Validation Added</li>
 <li>tables created and being added from signup/login/search</li>
 <li>Validation Redirection and some FrontEnd needed</li>
+
+# Day 5 Group Project Sequlizer CRUD, MVC
+<li>Validation edits </li>
+<li></li>
+<li></li>
+<li></li>

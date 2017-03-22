@@ -84,7 +84,7 @@ router.post("/signup", function(req, res) {
     console.log(req.body)
 
 
-    bcrypt.hash(req.body.password, saltRounds).then(function(err, hash) {
+    bcrypt.hash(req.body.password, saltRounds,function(err, hash) {
         // console.log(hash)
 
         db.user.create({
