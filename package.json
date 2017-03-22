@@ -4,6 +4,7 @@
   "description": "Coding Requirements\r Must use a Node and Express Web Server",
   "main": "index.js",
   "dependencies": {
+    "bcrypt": "^1.0.2",
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
     "express-handlebars": "^3.0.0",

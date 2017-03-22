@@ -1,21 +1,33 @@
 {
     "development": {
         "username": "root",
+<<<<<<< Updated upstream
         "password": "Kainer2305",
+=======
+        "password": "UNCCrugby_49",
+>>>>>>> Stashed changes
         "database": "pets_development",
         "host": "127.0.0.1",
         "dialect": "mysql"
     },
     "test": {
         "username": "root",
+<<<<<<< Updated upstream
         "password": "Kainer2305",
+=======
+        "password": "UNCCrugby_49",
+>>>>>>> Stashed changes
         "database": "pets_development",
         "host": "127.0.0.1",
         "dialect": "mysql"
     },
     "production": {
         "username": "root",
+<<<<<<< Updated upstream
         "password": "Kainer2305",
+=======
+        "password": "UNCCrugby_49",
+>>>>>>> Stashed changes
         "database": "pets_development",
         "host": "127.0.0.1",
         "dialect": "mysql"
