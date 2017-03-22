@@ -55,3 +55,10 @@ Create a migration strategy for sharing data across teammembers.
 <li>Added basic functionality and first INSERT statement to DB</li>
 <li>Need work on Validations for email,password match,zipcode Regex</li>
 </ul>
+
+
+# Day 4 Group Project Sequlizer CRUD, MVC
+<li>Restful Routs Generated for project </li>
+<li>Validation Added</li>
+<li>tables created and being added from signup/login/search</li>
+<li>Validation Redirection and some FrontEnd needed</li>
