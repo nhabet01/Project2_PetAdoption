@@ -15,8 +15,7 @@ const API = {
             let zip = params.zip;
             console.log(animalType,animalAge,animalSex,zip)
             //Difference between age and size? why is size hardcoded
-            petfinder.findPet(zip, {animal: animalType, sex: animalSex, age: animalAge, size: 'M' }, function(err, breeds) {
-
+            petfinder.findPet(zip, {animal: animalType, sex: animalSex, age: animalAge}, function(err, breeds) {
 
                 let data = []
                 for (var i = 0; i < breeds.length; i++) {

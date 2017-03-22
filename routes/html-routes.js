@@ -146,6 +146,16 @@ router.post('/search/:username', (req, res) => {
     console.log(req.params.username)
     console.log('BODY')
     console.log(req.body)
+   
+    var zip = req.body.zip;
+
+
+    var isValidZip = /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zip);
+    console.log(isValidZip);
+    if(!isValidZip){
+        return
+    }
+
     // animal | age  | gender
      db.user.update({ zip: req.body.zip , animal: req.body.animalType , age: req.body.animalAge ,gender: req.body.animalSex },
      {
