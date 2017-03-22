@@ -1,22 +1,14 @@
 {
     "development": {
         "username": "root",
-
-
         "password": "UNCCrugby_49",
-
-
         "database": "pets_development",
         "host": "127.0.0.1",
         "dialect": "mysql"
     },
     "test": {
         "username": "root",
-
         "password": "UNCCrugby_49",
-
-
-
         "database": "pets_development",
         "host": "127.0.0.1",
         "dialect": "mysql"
@@ -24,7 +16,6 @@
     "production": {
         "username": "root",
         "password": "UNCCrugby_49",
-
         "database": "pets_development",
         "host": "127.0.0.1",
         "dialect": "mysql"
