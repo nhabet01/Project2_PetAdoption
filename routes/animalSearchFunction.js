@@ -1,3 +1,4 @@
+//This code handles our API query
 const express = require("express");
 const router = express.Router();
 var petfinder = require('petfinder')('357d4a946c3d94988341843dbe6abed5', '6b28ab1dc3723180ab6a01aa0491b5fe');
@@ -8,10 +9,12 @@ const API = {
             console.log('PARAMS')
             console.log(params);
             let animalType = params.animal.toLowerCase();
-            let animalAge = params.age; 
+            let animalAge = params.age;
+            //Slice the first letter of the gender (M or F) as that is all that is needed to query the api 
             let animalSex = params.gender.slice(0,1);
             let zip = params.zip;
-                    console.log(animalType,animalAge,animalSex,zip)
+            console.log(animalType,animalAge,animalSex,zip)
+            //Difference between age and size? why is size hardcoded
             petfinder.findPet(zip, {animal: animalType, sex: animalSex, age: animalAge, size: 'M' }, function(err, breeds) {
 
 
