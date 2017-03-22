@@ -50,9 +50,16 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: true,
         }
-
-
-    });
+    }
+    // {
+    //     indexes: [
+    //     // Create a unique index on email
+    //     {
+    //       unique: true,
+    //       fields: ['email']
+    //     }]
+    // }
+    );
 
     return User;
 };

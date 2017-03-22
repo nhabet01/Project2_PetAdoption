@@ -3,17 +3,15 @@ const router = express.Router();
 const apiMain = require("./animalSearchFunction.js")
 const db = require("../models/")
 var bcrypt = require('bcrypt');
-const saltRounds = 10;
-var Saltedpass = ' '
+const saltRounds = 4;
+// var Saltedpass = ' '
+
     // Routes
-    // =============================================================
-
-//     bcrypt.compare(myPlaintextPassword, hash, function(err, res) {
-//             console.log
-// });
 
 
-//=================GET ROUTES
+
+//=================GET ROUTES========================================
+//main.handlebars handler (within views not layouts...should change name)
 router.get('/', (req, res) => {
 
 
@@ -24,7 +22,7 @@ router.get('/', (req, res) => {
     res.render('main', data);
 
 });
-
+//signup.handlebars handler
 router.get('/signup', (req, res) => {
     var data = {
         hello: ' World'
@@ -32,7 +30,7 @@ router.get('/signup', (req, res) => {
     res.render('signup', data);
 
 });
-
+//login.handlebars handler
 router.get('/login', (req, res) => {
     var data = {
         hello: ' World'
@@ -41,40 +39,37 @@ router.get('/login', (req, res) => {
 
 });
 
+//animalSearch.handlbars handler
+//Search page only accessible to users who have signed up
 router.get('/search/:username', (req, res) => {
     console.log(req.params.username);
 
     var data = {
         username: req.params.username
     }
+    //browser address bar = http//_____/search/username while displaying the animalSearch handlebars page
     res.render('animalSearch', data);
 
 });
 
+//petsOnSearch.handlebars handler
 router.get('/foundAnimals/:username', (req, res) => {
-            db.user.findOne({
-        where: {
-            username: req.params.username
-        }
+        db.user.findOne({
+            where: {
+                username: req.params.username
+            }
     }).then(function(data){
 
-var params = data.dataValues
-    apiMain.findAminals(params , function(data) {
-        console.log('FUNN')
-            // console.log(data)
-        res.render('petsOnSearch', { pets: data });
-    })
-        
-        // console.log(data.dataValues)
-        // res.send(data.dataValues)
-    })
+        var params = data.dataValues
+        //call findAnimals from within /routes/animalSearchFunction.js
+        apiMain.findAminals(params , function(data) {
+            console.log('FUNN')
+                // console.log(data)
+            //{pets:data} pets is the handler passed to handlebars, data is the info to be displayed.
+            res.render('petsOnSearch', { pets: data });
+        })
 
-    // console.log(req.params.username);
-
-    // var data = {
-    //     username: req.params.username
-    // }
-    // res.render('animalSearch', data);
+    })
 
 });
 
@@ -82,14 +77,14 @@ var params = data.dataValues
 
 
 
-// ====================POST ROUTS
+// ====================POST ROUTES================================
 router.post("/signup", function(req, res) {
     console.log('SIGNUP')
 
     console.log(req.body)
 
 
-    bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+    bcrypt.hash(req.body.password, saltRounds).then(function(err, hash) {
         // console.log(hash)
 
         db.user.create({
@@ -123,13 +118,14 @@ router.post("/login", function(req, res) {
         }
     }).then(function(data) {
         if (data) {
-            // console.log(data.dataValues.password)
-            // console.log(data.dataValues)
+            // console.log("data.dataValues.password:");
+            // console.log(data.dataValues.password);
+            // console.log("--------");
+            // console.log("data.dataValues:")
+            console.log(data.dataValues)
             if (bcrypt.compareSync(req.body.password, data.dataValues.password)) {
-                // var user = { user: data.dataValues }
-                // console.log(user.id)
-                // res.render('animalSearch', data.dataValues)
-    res.redirect(`/search/${data.dataValues.username}`)
+                //if statement takes care of async version of bcrypt.compare
+                res.redirect(`/search/${data.dataValues.username}`)
                 
             } else {
                 res.redirect('/login')
@@ -159,6 +155,7 @@ router.post('/search/:username', (req, res) => {
             console.log(result)
             res.redirect(`/foundAnimals/${req.params.username}`)
         })
+            
             //No need anymore!
     // api.findAminals(req.body, function(data) {
     //     console.log('FUNN')
