@@ -1,45 +1,30 @@
 {
     "development": {
         "username": "root",
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-        "password": "Kainer2305",
-=======
+
+
         "password": "UNCCrugby_49",
->>>>>>> Stashed changes
-=======
-        "password": "learningispower77",
->>>>>>> 4d72ee8ce9e8ecf00657c576258325f11540cfe7
+
+
         "database": "pets_development",
         "host": "127.0.0.1",
         "dialect": "mysql"
     },
     "test": {
         "username": "root",
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-        "password": "Kainer2305",
-=======
+
         "password": "UNCCrugby_49",
->>>>>>> Stashed changes
-=======
-        "password": "Kainer2305!",
->>>>>>> 4d72ee8ce9e8ecf00657c576258325f11540cfe7
+
+
+
         "database": "pets_development",
         "host": "127.0.0.1",
         "dialect": "mysql"
     },
     "production": {
         "username": "root",
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-        "password": "Kainer2305",
-=======
         "password": "UNCCrugby_49",
->>>>>>> Stashed changes
-=======
-        "password": "Kainer2305!",
->>>>>>> 4d72ee8ce9e8ecf00657c576258325f11540cfe7
+
         "database": "pets_development",
         "host": "127.0.0.1",
         "dialect": "mysql"
