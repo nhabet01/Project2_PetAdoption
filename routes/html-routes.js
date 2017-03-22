@@ -61,7 +61,7 @@ router.get('/foundAnimals/:username', (req, res) => {
 var params = data.dataValues
     apiMain.findAminals(params , function(data) {
         console.log('FUNN')
-            console.log(data)
+            // console.log(data)
         res.render('petsOnSearch', { pets: data });
     })
         
