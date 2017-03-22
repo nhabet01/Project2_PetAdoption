@@ -8,7 +8,11 @@ body,
 html {
     height: 100%;
     background-repeat: no-repeat;
+<<<<<<< HEAD
     background-color: white;
+=======
+    background: url(https://i.ytimg.com/vi/4kfXjatgeEU/maxresdefault.jpg);
+>>>>>>> 4d72ee8ce9e8ecf00657c576258325f11540cfe7
     font-family: 'Oxygen', sans-serif;
     background-size: cover;
 }
@@ -90,7 +94,11 @@ input::-webkit-input-placeholder {
 .main-center {
     margin-top: 30px;
     margin: 0 auto;
+<<<<<<< HEAD
     max-width: 800px;
+=======
+    max-width: 400px;
+>>>>>>> 4d72ee8ce9e8ecf00657c576258325f11540cfe7
     padding: 10px 40px;
     background: #009edf;
     color: #FFF;
@@ -114,6 +122,7 @@ span.input-group-addon i {
     text-align: center;
 }
 
+<<<<<<< HEAD
 
 .nav-tabs a{
     background-color: #ff6633;
@@ -185,3 +194,14 @@ footer {
     }
 
 
+=======
+.thumbnail{
+    display: inline-block;
+    margin-right: 10px;
+    max-width: 300px;
+    border: 1px solid black;
+    /*max-height: 200px;*/
+    overflow: none;
+
+}
+>>>>>>> 4d72ee8ce9e8ecf00657c576258325f11540cfe7

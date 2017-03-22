@@ -1,0 +1,26 @@
+{{!--{ petPicture: 'http://photos.petfinder.com/photos/pets/37390667/1/?bust=1486700816&width=500&-x.jpg',
+    descriptsion: 'Thank you for your interest in our adoptable animals. If you would like more information about this pet, see the Shelter information below. We would love to help you rescue a perfect pet!Arturo is
+ a wonderful fellow with a very unusual coat! He is mostly black but his sides are a soft brown coloring. This gives him a very distinctive look that is hard to resist. It is also hard to resist snuggling with this
+medium-coated sweetheart. Arturo was picked up as a stray on January 13th. Arturo will be scheduled for neuter shortly after adoption. He seems to be quite kitty friendly so he most likely would fit right in to a mu
+lti-cat family! Come meet this handsome fellow today (closed Tuesdays) and see if he won\'t be a great addition to your family! #1701-0912Virginia Beach Animal Care & Adoption Center has wonderful pets available for
+ adoption. As of December 6, all animals are now at the new shelter at 341 Birdneck Road. The former shelter on Leroy Drive is now closed. If you have lost a pet, please visit the shelter in person and often as lost
+ animals arrive everyday. Contact Information: Virginia Beach Animal Care & Adoption Center, 341 Birdneck Road, Virginia Beach, VA 23451 Phone 757-385-4444 (x 2) NOTE: In order to help process your request for infor
+mation faster, please refer to the animal\'s intake number, shown next to the photo, rather than the name. This will assist us in locating the information about the animal you are referring to. All our animals are u
+p-to-date on vaccinations and if unaltered, the animal will be spayed or neutered prior to adoption. You do not have to be a resident of Va. Beach to adopt a pet. Please visit these wonderful animals today! March 19
+, 2017, 9:17 pm',
+    phone: '757-385-4444 ',
+    email: 'vbpdac@vbgov.com',
+    address: '341 S. Birdneck Road' },--}}
+    <div class="container-fluid text-center">
+        <div class="jumbotron-fluid">
+            <h1>Pets</h1>
+            {{#each pets}}
+            <div class="pet col-med-2 thumbnail">
+                <img class="petPicture" src="{{this.petPicture}}" alt="">
+                <p class="phone">Phone: {{this.phone}}</p>
+                <p>Email: {{this.email}}</p> 
+                <p>Address: {{this.address}}</p> 
+            </div>
+            {{/each}}
+        </div>
+    </div>
