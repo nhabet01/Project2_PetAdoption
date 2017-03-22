@@ -11,12 +11,16 @@ p-to-date on vaccinations and if unaltered, the animal will be spayed or neutere
     phone: '757-385-4444 ',
     email: 'vbpdac@vbgov.com',
     address: '341 S. Birdneck Road' },--}}
-    <h1>Pets</h1>
-    {{#each pets}}
-    <div class="pet col-med-6">
-        <img class="petPicture" src="{{this.petPicture}}" alt="">
-        <p class="phone">Phone: {{this.phone}}</p>
-        <p>Email: {{this.email}}</p> 
-        <p>Address: {{this.address}}</p> 
+    <div class="container-fluid text-center">
+        <div class="jumbotron-fluid">
+            <h1>Pets</h1>
+            {{#each pets}}
+            <div class="pet col-med-2 thumbnail">
+                <img class="petPicture" src="{{this.petPicture}}" alt="">
+                <p class="phone">Phone: {{this.phone}}</p>
+                <p>Email: {{this.email}}</p> 
+                <p>Address: {{this.address}}</p> 
+            </div>
+            {{/each}}
         </div>
-    {{/each}}
+    </div>

@@ -27,14 +27,18 @@ module.exports = function(sequelize, DataTypes) {
         email: {
             type: DataTypes.STRING,
             allowNull: false,
-            isEmail: true,//checks for email format (foo@bar.com) via validators.js & sequelize
+            validate: {
+                isEmail: true,//checks for email format (foo@bar.com) via validators.js & sequelize
+            }
+            
         },
 
         zip: {
             type: DataTypes.INTEGER,
             allowNull: true,
-            len: [5,5],//nh: using the combination of integer and length of 5 until a better validator is implemented
-
+            validate: {
+                len: [5,5],//nh: using the combination of integer and length of 5 until a better validator is implemented
+            }
         },
         animal: {
             type: DataTypes.STRING,
