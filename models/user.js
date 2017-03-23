@@ -56,14 +56,17 @@ module.exports = function(sequelize, DataTypes) {
                 type: DataTypes.STRING,
                 allowNull: true,
             }
-        }
+        }//ADD "," when using classMethods below
         // {
-        //     indexes: [
-        //     // Create a unique index on email
-        //     {
-        //       unique: true,
-        //       fields: ['email']
-        //     }]
+        //     classMethods: {
+        //         associate: function(models) {
+        //             Favorites.belongsTo(models.User,{
+        //                 foreignKey: {
+        //                     allowNull: false
+        //                 }
+        //             });
+        //         }
+        //     }
         // }
     );
 
