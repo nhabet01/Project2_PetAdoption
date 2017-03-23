@@ -4,10 +4,10 @@ const apiMain = require("./animalSearchFunction.js")
 const db = require("../models/")
 var bcrypt = require('bcrypt');
 const saltRounds = 4;
-var zipcode = require ('zipcode');
+var zipcode = require('zipcode');
 // var Saltedpass = ' '
 
-    // Routes
+// Routes
 
 
 
@@ -46,27 +46,27 @@ router.get('/search/:username', (req, res) => {
     console.log(req.params.username);
 
     var data = {
-        username: req.params.username
-    }
-    //browser address bar = http//_____/search/username while displaying the animalSearch handlebars page
+            username: req.params.username
+        }
+        //browser address bar = http//_____/search/username while displaying the animalSearch handlebars page
     res.render('animalSearch', data);
 
 });
 
 //petsOnSearch.handlebars handler
 router.get('/foundAnimals/:username', (req, res) => {
-        db.user.findOne({
-            where: {
-                username: req.params.username
-            }
-    }).then(function(data){
+    db.user.findOne({
+        where: {
+            username: req.params.username
+        }
+    }).then(function(data) {
 
         var params = data.dataValues
-        //call findAnimals from within /routes/animalSearchFunction.js
-        apiMain.findAminals(params , function(data) {
+            //call findAnimals from within /routes/animalSearchFunction.js
+        apiMain.findAminals(params, function(data) {
             console.log('FUNN')
                 // console.log(data)
-            //{pets:data} pets is the handler passed to handlebars, data is the info to be displayed.
+                //{pets:data} pets is the handler passed to handlebars, data is the info to be displayed.
             res.render('petsOnSearch', { pets: data });
         })
 
@@ -85,22 +85,29 @@ router.post("/signup", function(req, res) {
     console.log(req.body)
 
 
-    bcrypt.hash(req.body.password, saltRounds,function(err, hash) {
+    bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
         // console.log(hash)
 
         db.user.create({
-            name: req.body.name,
-            username: req.body.username,
-            password: hash,
-            email: req.body.email
+                name: req.body.name,
+                username: req.body.username,
+                password: hash,
+                email: req.body.email
 
 
-        }).then(function(data) {
-            // console.log(data.dataValues)
-
-             res.redirect(`/search/${data.dataValues.username}`)
-            // res.redirect('/', data.dataValues.username)
-        })
+            }).then(function(data, err) {
+                // console.log(data.dataValues)
+                if (err) {
+                    console.log('Baaad')
+                }
+                res.redirect(`/search/${data.dataValues.username}`)
+                    // res.redirect('/', data.dataValues.username)
+            })
+            .catch(function(error) {
+                console.log(error.message)
+                var data = { baderror: error.message }
+                res.render('signup', data)
+            });
 
 
     });
@@ -127,7 +134,7 @@ router.post("/login", function(req, res) {
             if (bcrypt.compareSync(req.body.password, data.dataValues.password)) {
                 //if statement takes care of async version of bcrypt.compare
                 res.redirect(`/search/${data.dataValues.username}`)
-                
+
             } else {
                 res.redirect('/login')
                 console.log('Password Wrong')
@@ -147,26 +154,25 @@ router.post('/search/:username', (req, res) => {
     console.log(req.params.username)
     console.log('BODY')
     console.log(req.body)
-   
+
     var newzip = zipcode.lookup(req.body.zip);
-        if (newzip == null) {
-            console.log("zip is invalid");
-            return
-        }
-   
+    if (newzip == null) {
+        console.log("zip is invalid");
+        return
+    }
+
 
 
     // animal | age  | gender
-     db.user.update({ zip: req.body.zip , animal: req.body.animalType , age: req.body.animalAge ,gender: req.body.animalSex },
-     {
-         where : { username : req.params.username}
-     }).then(function(result) {
-            // now you see me...
-            console.log(result)
-            res.redirect(`/foundAnimals/${req.params.username}`)
-        })
-            
-            //No need anymore!
+    db.user.update({ zip: req.body.zip, animal: req.body.animalType, age: req.body.animalAge, gender: req.body.animalSex }, {
+        where: { username: req.params.username }
+    }).then(function(result) {
+        // now you see me...
+        console.log(result)
+        res.redirect(`/foundAnimals/${req.params.username}`)
+    })
+
+    //No need anymore!
     // api.findAminals(req.body, function(data) {
     //     console.log('FUNN')
     //         // console.log(data)
