@@ -4,6 +4,7 @@ const apiMain = require("./animalSearchFunction.js")
 const db = require("../models/")
 var bcrypt = require('bcrypt');
 const saltRounds = 4;
+var zipcode = require ('zipcode');
 // var Saltedpass = ' '
 
     // Routes
@@ -147,14 +148,13 @@ router.post('/search/:username', (req, res) => {
     console.log('BODY')
     console.log(req.body)
    
-    var zip = req.body.zip;
+    var newzip = zipcode.lookup(req.body.zip);
+        if (newzip == null) {
+            console.log("zip is invalid");
+            return
+        }
+   
 
-
-    var isValidZip = /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zip);
-    console.log(isValidZip);
-    if(!isValidZip){
-        return
-    }
 
     // animal | age  | gender
      db.user.update({ zip: req.body.zip , animal: req.body.animalType , age: req.body.animalAge ,gender: req.body.animalSex },
