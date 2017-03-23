@@ -29,7 +29,7 @@ module.exports = function(sequelize, DataTypes) {
                 allowNull: false,
                 validate: {
                     isEmail: true, //checks for email format (foo@bar.com) via validators.js & sequelize
-                    msg: 'Pleace ENTER A GOOD EMAIL'
+
                 }
 
             },

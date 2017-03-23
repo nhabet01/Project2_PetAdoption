@@ -45,11 +45,21 @@ router.get('/login', (req, res) => {
 router.get('/search/:username', (req, res) => {
     console.log(req.params.username);
 
-    var data = {
+
+    db.user.findOne({
+        where: {
             username: req.params.username
         }
-        //browser address bar = http//_____/search/username while displaying the animalSearch handlebars page
-    res.render('animalSearch', data);
+    }).then(function(data) {
+
+        var params = data.dataValues
+        console.log(params)
+            // res.render('animalSearch', { pets: data });
+            //call findAnimals from within /routes/animalSearchFunction.js
+
+        res.render('animalSearch', { data: params });
+    })
+
 
 });
 
@@ -97,17 +107,25 @@ router.post("/signup", function(req, res) {
 
             }).then(function(data, err) {
                 // console.log(data.dataValues)
-                if (err) {
-                    console.log('Baaad')
-                }
+                console.log(err)
+                console.log('good')
                 res.redirect(`/search/${data.dataValues.username}`)
                     // res.redirect('/', data.dataValues.username)
             })
             .catch(function(error) {
-                console.log(error.message)
-                var data = { baderror: error.message }
-                res.render('signup', data)
-            });
+                    if (error) {
+                        console.log(error.message)
+                        var data = { baderror: error.message }
+                        res.render('signup', data)
+                    }
+
+
+                }
+
+
+
+            );
+
 
 
     });
@@ -136,11 +154,12 @@ router.post("/login", function(req, res) {
                 res.redirect(`/search/${data.dataValues.username}`)
 
             } else {
-                res.redirect('/login')
+
+                res.render('login', { wrongData: 'Wrong Password!' })
                 console.log('Password Wrong')
             }
         } else {
-            res.redirect('/login')
+            res.render('login', { wrongData: 'User does not exists!' })
             console.log('User Do Not exists')
         }
 
