@@ -67,4 +67,5 @@ Create a migration strategy for sharing data across teammembers.
 <li>Validation edits </li>
 <li>ZipCode validator update</li>
 <li>Frontend additions and update</li>
-<li></li>
+<li>Validation update on login page and signup page</li>
+<li>Need to work on LogOut option,authenification, Front End for day 6</li>

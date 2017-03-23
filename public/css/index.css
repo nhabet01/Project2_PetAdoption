@@ -8,7 +8,7 @@ body,
 html {
     height: 100%;
     background-repeat: no-repeat;
-    background: url(https://i.ytimg.com/vi/4kfXjatgeEU/maxresdefault.jpg);
+    background-color: white;
     font-family: 'Oxygen', sans-serif;
     background-size: cover;
 }
@@ -90,7 +90,7 @@ input::-webkit-input-placeholder {
 .main-center {
     margin-top: 30px;
     margin: 0 auto;
-    max-width: 400px;
+    max-width: 800px;
     padding: 10px 40px;
     background: #009edf;
     color: #FFF;
@@ -113,6 +113,78 @@ span.input-group-addon i {
     font-size: 11px;
     text-align: center;
 }
+
+
+.nav-tabs a{
+    background-color: #ff6633;
+    color: #ffffff;
+}
+
+
+.shadow {
+    box-shadow: 5px 5px 5px #888888;
+}
+
+.logo {
+    max-width: 100%;
+    margin: auto;
+}
+
+
+.match {
+    color: #999999;
+    vertical-align: bottom;
+}
+
+.test {
+        border:1px solid red;
+        vertical-align: middle;
+        height: 60px;
+
+}
+
+
+.container-fluid {
+    /*margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 10px;*/
+    box-shadow: 5px 5px 5px #888888;
+
+}   
+
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+ }
+
+body {
+    padding-top: 70px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
+}
+
+.navbar-fixed-top .nav {
+    padding: 15px 0;
+}
+
+.navbar-fixed-top .navbar-brand {
+    padding: 0 15px;
+}
+
+footer {
+    padding: 30px 0;
+}
+
+@media(min-width:768px) {
+    body {
+        padding-top: 100px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
+    }
+
+    .navbar-fixed-top .navbar-brand {
+        padding: 15px 0;
+    }
+
+
 
 .thumbnail{
     display: inline-block;
