@@ -7,6 +7,17 @@ var path = require('path')
 // Sets up the Express App
 // =============================================================
 var app = express();
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+//allow sessions
+app.use(session({
+    secret: 'app',
+    cookie: { maxAge: 6 * 1000 * 1000 * 1000 * 1000 * 1000 * 1000 },
+    proxy: true,
+    resave: true,
+    saveUninitialized: true
+}));
+app.use(cookieParser());
 var PORT = process.env.PORT || 8080;
 
 
