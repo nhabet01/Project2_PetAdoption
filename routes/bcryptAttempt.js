@@ -65,7 +65,7 @@
 //     })
 
 
-});
+// });
 //option 3: needed to add a promise:bcrypt.hash(req.body.password, saltRounds).then( function(hash)
 router.post("/signup", function(req, res) {
     console.log('SIGNUP')
@@ -107,30 +107,30 @@ var db = require("../models");
 // Routes
 // =============================================================
 
-module.exports = function(app) {
-    // GET route for getting all of the posts
-    app.get("/api/posts", function(req, res) {
-        // Add sequelize code to find all posts, and return them to the user with res.json
-        db.User.findAll({}).then(function(dbUser) {
-            // We have access to the todos as an argument inside of the callback function
-            res.json(dbUser);
-        });
-    });
+// module.exports = function(app) {
+//     // GET route for getting all of the posts
+//     app.get("/api/posts", function(req, res) {
+//         // Add sequelize code to find all posts, and return them to the user with res.json
+//         db.User.findAll({}).then(function(dbUser) {
+//             // We have access to the todos as an argument inside of the callback function
+//             res.json(dbUser);
+//         });
+//     });
 
-    // User route for saving a new User
-    app.post("/signup", function(req, res) {
-        console.log(req.body);
-        // Add sequelize code for creating a User using req.body,
-        // then return the result using res.json
-        db.User.create({
-            title: req.body.title,
-            body: req.body.body,
-            category: req.body.category
-        }).then(function(dbUser) {
-            res.json(dbUser);
-        })
+//     // User route for saving a new User
+//     app.post("/signup", function(req, res) {
+//         console.log(req.body);
+//         // Add sequelize code for creating a User using req.body,
+//         // then return the result using res.json
+//         db.User.create({
+//             title: req.body.title,
+//             body: req.body.body,
+//             category: req.body.category
+//         }).then(function(dbUser) {
+//             res.json(dbUser);
+//         })
 
 
-    });
+//     });
 
-}
+// }
