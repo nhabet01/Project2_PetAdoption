@@ -18,8 +18,12 @@ var zipcode = require('zipcode');
 router.get('/logout', function(req, res) {
 
     req.session.logged_in = false;
+    req.session.destroy(function(){
+    
+        res.redirect("/");  
+    });  
 
-    res.redirect('/');
+    // res.redirect('/');
 })
 
 
@@ -57,13 +61,6 @@ router.get('/search/:username', (req, res) => {
     console.log(req.params.username);
 
 
-
-    db.User.findOne({
-        where: {
-            username: req.params.username
-        }
-    }).then(function(data) {
-
     // IF THE PERSON LOGGED IN THEN WE CAN ONLY ACCES DATA!
     if (req.session.logged_in && req.session.user_name == req.params.username) {
         db.User.findOne({
@@ -87,15 +84,6 @@ router.get('/search/:username', (req, res) => {
 
 //petsOnSearch.handlebars handler
 router.get('/foundAnimals/:username', (req, res) => {
-
-    db.User.findOne({
-        where: {
-            username: req.params.username
-        }
-    }).then(function(data) {
-
-        var params = data.dataValues
-
     // if person LOGGED IN THEN WE CAN ONLY ACCES THE DATA!!!!
     if (req.session.logged_in && req.session.user_name == req.params.username) {
         // if we create boolean here???//
@@ -123,7 +111,17 @@ router.get('/foundAnimals/:username', (req, res) => {
 });
 
 
+// If no matching route is found default to home
+router.use(function(req, res) {
+    var data = {
+        hello: ' World'
+    }
+    res.render('main', data);
+});
 
+  // app.use(function(req, res) {
+  //   res.sendFile(path.join(__dirname, "/../public/home.html"));
+  // });
 
 
 // ====================POST ROUTES================================

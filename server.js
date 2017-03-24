@@ -40,7 +40,7 @@ app.set("view engine", "handlebars");
 // Routes =============================================================
 
 // const APIRoutes = require("./routes/api-routes.js")
-const HTMLRouter = require("./routes/html-routes.js")
+const HTMLRouter = require("./routes/html-routes.js");
 
 
 

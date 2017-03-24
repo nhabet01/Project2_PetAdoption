@@ -2,13 +2,11 @@ var bcrypt = require("bcrypt");
 var validator = require('validator');
 
 module.exports = function(sequelize, DataTypes) {
-<<<<<<< HEAD
     var Favorites = sequelize.define("Favorites", {
             //sequelize automatically adds ID as primary key and auto increments
-
             animalID: {
-                type: DataTypes.STRING,//need to confirm id is stored as a string
-                allowNull: false
+                    type: DataTypes.STRING,//need to confirm id is stored as a string
+                    allowNull: false
             },
         },
         {
@@ -22,7 +20,7 @@ module.exports = function(sequelize, DataTypes) {
                 }
             }
         }
-    });
+    );
 
     return Favorites;
 };
