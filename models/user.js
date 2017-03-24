@@ -2,7 +2,7 @@ var bcrypt = require("bcrypt");
 var validator = require('validator');
 
 module.exports = function(sequelize, DataTypes) {
-    var User = sequelize.define("user", {
+    var User = sequelize.define("User", {
             //sequelize automatically adds ID as primary key and auto increments
 
             name: {
@@ -56,18 +56,16 @@ module.exports = function(sequelize, DataTypes) {
                 type: DataTypes.STRING,
                 allowNull: true,
             }
-        }//ADD "," when using classMethods below
-        // {
-        //     classMethods: {
-        //         associate: function(models) {
-        //             Favorites.belongsTo(models.User,{
-        //                 foreignKey: {
-        //                     allowNull: false
-        //                 }
-        //             });
-        //         }
-        //     }
-        // }
+        },//ADD "," when using classMethods below
+        {
+            classMethods: {
+                associate: function(models) {
+                    User.hasMany(models.Favorites, {
+                        onDelete: "cascade"
+                    });
+                }
+            }
+        }
     );
 
     return User;

@@ -46,7 +46,7 @@ router.get('/search/:username', (req, res) => {
     console.log(req.params.username);
 
 
-    db.user.findOne({
+    db.User.findOne({
         where: {
             username: req.params.username
         }
@@ -64,7 +64,7 @@ router.get('/search/:username', (req, res) => {
 
 //petsOnSearch.handlebars handler
 router.get('/foundAnimals/:username', (req, res) => {
-    db.user.findOne({
+    db.User.findOne({
         where: {
             username: req.params.username
         }
@@ -98,7 +98,7 @@ router.post("/signup", function(req, res) {
     bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
         // console.log(hash)
 
-        db.user.create({
+        db.User.create({
                 name: req.body.name,
                 username: req.body.username,
                 password: hash,
@@ -138,7 +138,7 @@ router.post("/login", function(req, res) {
 
     console.log(req.body.username);
     console.log(req.body.password);
-    db.user.findOne({
+    db.User.findOne({
         where: {
             username: req.body.username
         }
@@ -183,7 +183,7 @@ router.post('/search/:username', (req, res) => {
 
 
     // animal | age  | gender
-    db.user.update({ zip: req.body.zip, animal: req.body.animalType, age: req.body.animalAge, gender: req.body.animalSex }, {
+    db.User.update({ zip: req.body.zip, animal: req.body.animalType, age: req.body.animalAge, gender: req.body.animalSex }, {
         where: { username: req.params.username }
     }).then(function(result) {
         // now you see me...

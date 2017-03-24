@@ -9,11 +9,11 @@ module.exports = function(sequelize, DataTypes) {
                 type: DataTypes.STRING,//need to confirm id is stored as a string
                 allowNull: false
             },
-        }
+        },
         {
             classMethods: {
                 associate: function(models) {
-                    Favorites.belongsTo(models.User,{
+                    Favorites.belongsTo(models.User, {
                         foreignKey: {
                             allowNull: false
                         }
