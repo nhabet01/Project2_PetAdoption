@@ -64,7 +64,7 @@ router.get('/search/:username', (req, res) => {
 });
 
 //petsOnSearch.handlebars handler
-router.get('/foundAnimals/:username', function(req, res) {// if add "isAuthenticated," before "function" then the logout works and prevents anyone getting to the foundAnimals page. however, prevented even if user logs in. I think it is an issue with the /username route.
+router.get('/foundAnimals/:username',isAuthenticated, function(req, res) {// if add "isAuthenticated," before "function" then the logout works and prevents anyone getting to the foundAnimals page. however, prevented even if user logs in. I think it is an issue with the /username route...
     db.User.findOne({
         where: {
             username: req.params.username
@@ -138,7 +138,7 @@ router.post("/login", function(req, res) {
     console.log('LOGIN')
 
     console.log(req.body.username);
-    console.log(req.body.password);
+    console.log(req.body.password);//we are able to acquire the user's password here...does this need to be fixed with a hook:beforeCreate? even though we are on the login page?
     db.User.findOne({
         where: {
             username: req.body.username
@@ -170,9 +170,10 @@ router.post("/login", function(req, res) {
 });
 
 
-router.post('/search/:username',  function(req, res) {// if add "isAuthenticated," before "function" then the logout works and prevents anyone getting to the foundAnimals page. however, prevented even if user logs in. I think it is an issue with the /username route.
-    console.log(req.params.username)
-    console.log('BODY')
+router.post('/search/:username', function(req, res) {// if add "isAuthenticated," before "function" then the logout works and prevents anyone getting to the foundAnimals page. however, prevented even if user logs in. I think it is an issue with the /username route.
+    // console.log("post/search:username")   
+    // console.log(req.user.username)
+    console.log('.post(search/username:req.body');
     console.log(req.body)
 
     var newzip = zipcode.lookup(req.body.zip);
@@ -187,7 +188,7 @@ router.post('/search/:username',  function(req, res) {// if add "isAuthenticated
     db.User.update({ zip: req.body.zip, animal: req.body.animalType, age: req.body.animalAge, gender: req.body.animalSex }, {
         where: { username: req.params.username }
     }).then(function(result) {
-        // now you see me...
+       console.log(' now you see me...');
         console.log(result)
         res.redirect(`/foundAnimals/${req.params.username}`)
     })
