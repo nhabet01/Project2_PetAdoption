@@ -2,6 +2,7 @@ var bcrypt = require("bcrypt");
 var validator = require('validator');
 
 module.exports = function(sequelize, DataTypes) {
+<<<<<<< HEAD
     var Favorites = sequelize.define("Favorites", {
             //sequelize automatically adds ID as primary key and auto increments
 
@@ -21,7 +22,7 @@ module.exports = function(sequelize, DataTypes) {
                 }
             }
         }
-    );
+    });
 
     return Favorites;
 };

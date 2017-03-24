@@ -56,6 +56,7 @@ module.exports = function(sequelize, DataTypes) {
                 type: DataTypes.STRING,
                 allowNull: true,
             }
+
         },//ADD "," when using classMethods below
         {
             classMethods: {
@@ -66,6 +67,7 @@ module.exports = function(sequelize, DataTypes) {
                 }
             }
         }
+
     );
 
     return User;
