@@ -1,6 +1,8 @@
 // Requiring our models and passport as we've configured it
 var db = require("../models");
 var passport = require("../config/passport");
+// Requiring our custom middleware for checking if a user is logged in
+var isAuthenticated = require("../config/middleware/isAuthenticated");
 
 module.exports = function(app) {
 
@@ -9,7 +11,7 @@ module.exports = function(app) {
     req.logout();
     req.logOut();//stackoverflow suggested "O" for logOut...still doesn't work
     req.session.destroy(function(){
-        res.clearCookie('conect.sid');
+        res.clearCookie('connect.sid');
         res.redirect("/");  
     });  //nh: do we need? 
     

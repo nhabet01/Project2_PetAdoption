@@ -9,7 +9,8 @@ var zipcode = require('zipcode');
 
 // Routes
 
-
+// Requiring our custom middleware for checking if a user is logged in
+var isAuthenticated = require("../config/middleware/isAuthenticated");
 
 //=================GET ROUTES========================================
 //main.handlebars handler (within views not layouts...should change name)
@@ -53,7 +54,7 @@ router.get('/search/:username', (req, res) => {
     }).then(function(data) {
 
         var params = data.dataValues
-        console.log(params)
+        console.log(params);
             // res.render('animalSearch', { pets: data });
             //call findAnimals from within /routes/animalSearchFunction.js
         res.render('animalSearch', { data: params });
@@ -63,7 +64,7 @@ router.get('/search/:username', (req, res) => {
 });
 
 //petsOnSearch.handlebars handler
-router.get('/foundAnimals/:username', (req, res) => {
+router.get('/foundAnimals/:username', function(req, res) {// if add "isAuthenticated," before "function" then the logout works and prevents anyone getting to the foundAnimals page. however, prevented even if user logs in. I think it is an issue with the /username route.
     db.User.findOne({
         where: {
             username: req.params.username
@@ -169,7 +170,7 @@ router.post("/login", function(req, res) {
 });
 
 
-router.post('/search/:username', (req, res) => {
+router.post('/search/:username',  function(req, res) {// if add "isAuthenticated," before "function" then the logout works and prevents anyone getting to the foundAnimals page. however, prevented even if user logs in. I think it is an issue with the /username route.
     console.log(req.params.username)
     console.log('BODY')
     console.log(req.body)

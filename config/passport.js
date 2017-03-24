@@ -12,6 +12,7 @@ passport.serializeUser(function(user, cb) {
 
 passport.deserializeUser(function(obj, cb) {
   cb(null, obj);
+  console.log("deserialized..")
 });
 
 // Exporting our configured passport
