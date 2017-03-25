@@ -116,9 +116,9 @@ router.get('/foundAnimals/:username', (req, res) => {
 // });
 //===================tried code below as well but doesn't recognize the path/file================
   // router.use(function(req, res) {
-        // var data = {
-    //     hello: ' World'
-    // }
+  //   //     var data = {
+  //   //     hello: ' World'
+  //   // }
   //   res.sendFile(path.join(__dirname, "/../views/main.handlebars"));
   // });
 
@@ -163,15 +163,8 @@ router.post("/signup", function(req, res) {
                         res.render('signup', data)
                     }
 
-
                 }
-
-
-
             );
-
-
-
     });
 });
 
