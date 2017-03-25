@@ -36,7 +36,7 @@ router.get('/', (req, res) => {
 
     // res.render('main', data);
     // console.log(path.join(__dirname, "../../views/main.handlebars"))
-    res.sendFile(path.join(__dirname, "../../views/main.handlebars"));
+    res.render(path.join(__dirname, "/../views/main.handlebars"));
 
 });
 

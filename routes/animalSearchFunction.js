@@ -5,23 +5,24 @@ var petfinder = require('petfinder')('357d4a946c3d94988341843dbe6abed5', '6b28ab
 
 const API = {
 
-        findAminals: (params, cb) => {
-            console.log('PARAMS')
-            console.log(params);
-            let animalType = params.animal.toLowerCase();
-            let animalAge = params.age;
-            //Slice the first letter of the gender (M or F) as that is all that is needed to query the api 
-            let animalSex = params.gender.slice(0,1);
-            let zip = params.zip;
-            console.log(animalType,animalAge,animalSex,zip)
+    findAminals: (params, cb) => {
+        console.log('PARAMS')
+        console.log(params);
+        let animalType = params.animal.toLowerCase();
+        let animalAge = params.age;
+        //Slice the first letter of the gender (M or F) as that is all that is needed to query the api 
+        let animalSex = params.gender.slice(0, 1);
+        let zip = params.zip;
+        console.log(animalType, animalAge, animalSex, zip)
             //Difference between age and size? why is size hardcoded
-            petfinder.findPet(zip, {animal: animalType, sex: animalSex, age: animalAge}, function(err, breeds) {
+        petfinder.findPet(zip, { animal: animalType, sex: animalSex, age: animalAge }, function(err, breeds) {
 
-                let data = []
-                for (var i = 0; i < breeds.length; i++) {
+            let data = []
+            for (var i = 0; i < breeds.length; i++) {
 
-                    if (breeds[i].contact.address1 && breeds[i].contact.email && breeds[i].media.photos['1']) {
-                        // console.log(breeds[i].sex)
+                if (breeds[i].contact.address1 && breeds[i].contact.email && breeds[i].media.photos['1']) {
+                    //this is out pet ids
+                    console.log(breeds[i])
                         // console.log(breeds[i].age)
                         // console.log(breeds[i].shelterId)
                         //     //Here we need to do fnction if objHasAkey(for phone email and address and if it does then display it)
@@ -32,22 +33,48 @@ const API = {
                         // console.log(breeds[i].media.photos['1'].x)
                         // console.log(`_______NEXT PET ${i}___________`)
                         // console.log(breeds[i].media.photos['1'].x)
-                        let pet = {
-                            petPicture: breeds[i].media.photos['1'].x,
-                            descriptsion: breeds[i].description,
-                            phone: breeds[i].contact.phone,
-                            email: breeds[i].contact.email,
-                            address: breeds[i].contact.address1,
+                    let pet = {
+                        // petId: breeds[i].id,
+                        petPicture: breeds[i].media.photos['1'].x,
+                        descriptsion: breeds[i].description,
+                        phone: breeds[i].contact.phone,
+                        email: breeds[i].contact.email,
+                        address: breeds[i].contact.address1,
 
-                        }
-                        data.push(pet)
                     }
+                    data.push(pet)
                 }
-                cb(data)
-            });
+            }
+            cb(data)
+        });
 
 
-        }
+    },
+
+    findfav() {
+
+        petfinder.getPet(37624160, {}, function(err, breeds) {
+
+
+            console.log(breeds)
+        })
+
+        // petfinder.getPet('37624160', function(data) {
+        //     console.log(data)
+        // })
+        // console.log('boo')
+
+        // petId = 37624160
+        // getPet(petId, {}, function(favPet) {
+
+        //     console.log(favPet)
+        // })
     }
+}
+API.findfav();
 
-    module.exports = API;
+module.exports = API;
+
+
+
+// for favotrite animal we will call API.findfav(petId)
