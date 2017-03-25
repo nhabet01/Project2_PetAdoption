@@ -56,18 +56,18 @@ module.exports = function(sequelize, DataTypes) {
                 type: DataTypes.STRING,
                 allowNull: true,
             }
-        } //ADD "," when using classMethods below
-        // {
-        //     classMethods: {
-        //         associate: function(models) {
-        //             Favorites.belongsTo(models.User,{
-        //                 foreignKey: {
-        //                     allowNull: false
-        //                 }
-        //             });
-        //         }
-        //     }
-        // }
+
+        }, //ADD "," when using classMethods below
+        {
+            classMethods: {
+                associate: function(models) {
+                    User.hasMany(models.Favorites, {
+                        onDelete: "cascade" //not sure this should be allowed as may delete pets from other users?
+                    });
+                }
+            }
+        }
+
     );
 
     return User;

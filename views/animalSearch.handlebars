@@ -1,5 +1,9 @@
-<div class="container">
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+
+ <!-- Navigation -->
+
+    <div class="shadow">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+
      
        <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -17,24 +21,26 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-        
-                    <li>
+                     <li>
                         <a href="/logout">Logout</a>
                     </li>
-
+                    <li>
+                        <a href="/contact">Contact</a>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
     </nav>
+
+<div class="container">
+
     <div class="row main">
         <div class="main-login main-center">
 
             <h5>Animal Search for {{data.username}}</h5>
             <form class="" method="POST" action="/search/{{data.username}}">
-
-
 
                 <div class="form-group">
                     {{!--<label for="username" class="cols-sm-2 control-label">Animal</label>--}}
@@ -98,7 +104,7 @@
                 <div class="form-group ">
 
 
-                    <button type="submit" id="button" class=" btn btn-primary btn-lg btn-block login-button ">Search For Animals</button>
+                <button type="submit" id="button" class=" btn btn-primary btn-lg btn-block login-button ">Search For Animals</button>
 
                 </div>
 
@@ -106,6 +112,4 @@
         </div>
     </div>
 </div>
-<sript> 
-{{!-- var zip = $(#zip).val(); --}}
-</script>
+
