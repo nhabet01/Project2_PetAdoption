@@ -46,7 +46,7 @@ router.get('/search/:username', (req, res) => {
     console.log(req.params.username);
 
 
-    db.user.findOne({
+    db.User.findOne({
         where: {
             username: req.params.username
         }
@@ -64,7 +64,8 @@ router.get('/search/:username', (req, res) => {
 
 //petsOnSearch.handlebars handler
 router.get('/foundAnimals/:username', (req, res) => {
-    db.user.findOne({
+    // if we create boolean here???//
+    db.User.findOne({
         where: {
             username: req.params.username
         }
@@ -73,7 +74,7 @@ router.get('/foundAnimals/:username', (req, res) => {
         var params = data.dataValues
 
         //call findAnimals from within /routes/animalSearchFunction.js
-        apiMain.findAminals(params , function(data) {//nh: function(data)=cb in animalSearchFunction.js
+        apiMain.findAminals(params, function(data) { //nh: function(data)=cb in animalSearchFunction.js
             console.log('FUNN')
                 // console.log(data)
                 //{pets:data} pets is the handler passed to handlebars, data is the info to be displayed.
@@ -98,7 +99,7 @@ router.post("/signup", function(req, res) {
     bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
         // console.log(hash)
 
-        db.user.create({
+        db.User.create({
                 name: req.body.name,
                 username: req.body.username,
                 password: hash,
@@ -138,7 +139,7 @@ router.post("/login", function(req, res) {
 
     console.log(req.body.username);
     console.log(req.body.password);
-    db.user.findOne({
+    db.User.findOne({
         where: {
             username: req.body.username
         }
@@ -183,7 +184,7 @@ router.post('/search/:username', (req, res) => {
 
 
     // animal | age  | gender
-    db.user.update({ zip: req.body.zip, animal: req.body.animalType, age: req.body.animalAge, gender: req.body.animalSex }, {
+    db.User.update({ zip: req.body.zip, animal: req.body.animalType, age: req.body.animalAge, gender: req.body.animalSex }, {
         where: { username: req.params.username }
     }).then(function(result) {
         // now you see me...
