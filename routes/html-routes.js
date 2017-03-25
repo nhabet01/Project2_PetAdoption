@@ -5,8 +5,9 @@ const db = require("../models/")
 var bcrypt = require('bcrypt');
 const saltRounds = 4;
 var zipcode = require('zipcode');
-var path = require("path")
-    // var Saltedpass = ' '
+var path = require('path');
+// var Saltedpass = ' '
+
 
 // Routes
 
@@ -74,7 +75,7 @@ router.get('/search/:username', (req, res) => {
             console.log(params)
                 // res.render('animalSearch', { pets: data });
                 //call findAnimals from within /routes/animalSearchFunction.js
-            res.render('animalSearch', { data: params });
+            res.render('animalSearch', { data: params }); //nh: render requires you have a handle
         })
 
     } else {
@@ -110,9 +111,6 @@ router.get('/foundAnimals/:username', (req, res) => {
         res.send('unauthorized')
     }
 });
-
-
-
 
 
 // ====================POST ROUTES================================
@@ -165,7 +163,7 @@ router.post("/login", function(req, res) {
     console.log('LOGIN')
 
     console.log(req.body.username);
-    console.log(req.body.password);
+    // console.log(req.body.password);
     db.User.findOne({
         where: {
             username: req.body.username
@@ -252,5 +250,6 @@ router.use(function(req, res) {
     res.render(path.join(__dirname, "/../views/main.handlebars"));
 });
 
-
+//================ If no matching route is found default to home====================
+// router.use(function(req, res) {
 module.exports = router;
