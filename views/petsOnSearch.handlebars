@@ -12,7 +12,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="/">
                     <img src="../static/images/petfinderLogoSmall.png" alt="">
                 </a>
             </div>
@@ -52,8 +52,8 @@ p-to-date on vaccinations and if unaltered, the animal will be spayed or neutere
         <div class="jumbotron-fluid">
             <h1>Pets</h1>
             {{#each pets}}
-            <div class="pet col-md-2 thumbnail">
-                <img class="petPicture" src="{{this.petPicture}}" alt="">
+            <div class="col-lg-3 col-md-4 col-xs-8 thumb crop">
+                <img class="petPicture thumbnail" width="300px" height="300px" src="{{this.petPicture}}" alt="">
                 <p class="phone">Phone: {{this.phone}}</p>
                 <p>Email: {{this.email}}</p> 
                 <p>Address: {{this.address}}</p> 
@@ -61,3 +61,5 @@ p-to-date on vaccinations and if unaltered, the animal will be spayed or neutere
             {{/each}}
         </div>
     </div>
+
+   
