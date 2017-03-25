@@ -22,14 +22,11 @@ router.get('/logout', function(req, res) {
     
         res.redirect("/");  
     });  
-
-    // res.redirect('/');
 })
 
 
 
 router.get('/', (req, res) => {
-
 
     var data = {
         hello: ' World'
@@ -38,6 +35,7 @@ router.get('/', (req, res) => {
     res.render('main', data);
 
 });
+
 //signup.handlebars handler
 router.get('/signup', (req, res) => {
     var data = {
@@ -105,22 +103,23 @@ router.get('/foundAnimals/:username', (req, res) => {
 
         })
     } else {
-        //we van create some cool unauthorized page! 
+        //we can create some cool unauthorized page! 
         res.send('unauthorized')
     }
 });
 
 
-// If no matching route is found default to home
-router.use(function(req, res) {
-    var data = {
-        hello: ' World'
-    }
-    res.render('main', data);
-});
+//================ If no matching route is found default to home====================
+// router.use(function(req, res) {
 
-  // app.use(function(req, res) {
-  //   res.sendFile(path.join(__dirname, "/../public/home.html"));
+//     res.redirect("/");
+// });
+//===================tried code below as well but doesn't recognize the path/file================
+  // router.use(function(req, res) {
+        // var data = {
+    //     hello: ' World'
+    // }
+  //   res.sendFile(path.join(__dirname, "/../views/main.handlebars"));
   // });
 
 
@@ -153,7 +152,7 @@ router.post("/signup", function(req, res) {
                 req.session.user_email = req.body.email;
 
 
-                // we give a token of sessoin an le use acces it during the visit until log out! 
+                // we give a session token  and user has access to it during the visit until they log out! 
                 res.redirect(`/search/${req.session.user_name}`)
                     // res.redirect('/', data.dataValues.username)
             })

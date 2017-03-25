@@ -62,7 +62,7 @@ module.exports = function(sequelize, DataTypes) {
             classMethods: {
                 associate: function(models) {
                     User.hasMany(models.Favorites, {
-                        onDelete: "cascade"
+                        onDelete: "cascade" //not sure this should be allowed as may delete pets from other users?
                     });
                 }
             }
