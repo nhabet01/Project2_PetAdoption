@@ -22,6 +22,10 @@
                     <li>
                         <a href="/">Contact</a>
                     </li>
+                    <li>
+                    <!-- need to pass in username to add to href=/search/username -->
+                        <a href="/">Search</a>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -37,6 +41,13 @@
                 <p class="phone">Phone: {{this.phone}}</p>
                 <p>Email: {{this.email}}</p> 
                 <p>Address: {{this.address}}</p> 
+                <div class="favs">
+                 <!-- need to 1.) find out what the pet id is called and place somewhere in that form (maybe where it is maybe somewhere else) 2.) create a post route for foundAnimals/...so that an entry is recorded in the favorites table. 3.) need to add a boolean to the table? maybe not...but must associate the pet with user and many users may like the same pet so have to change the associations-->
+                    <form action="/foundAimals/{{this.petId}}" method="POST">
+                      <input type="hidden" name="favorite" value="true">
+                      <button type="submit">Favorite!</button>
+                    </form>
+                </div>
             </div>
             {{/each}}
         </div>
