@@ -96,9 +96,12 @@ router.get('/foundAnimals/:username', (req, res) => {
             //call findAnimals from within /routes/animalSearchFunction.js
             apiMain.findAminals(params, function(data) { //nh: function(data)=cb in animalSearchFunction.js
                 console.log('FUNN')
+                var userobj = {username:params.username,
+                            userid:params.id}
+                            console.log("userobj:" + userobj.username + "-" + userobj.userid)
                     // console.log(data)
                     //{pets:data} pets is the handler passed to handlebars, data is the info to be displayed.
-                res.render('petsOnSearch', { pets: data });
+                res.render('petsOnSearch', {pets:data, user:userobj});
             })
 
         })
