@@ -65,6 +65,7 @@ Create a migration strategy for sharing data across teammembers.
 
 # Day 5 Group Project Sequlizer CRUD, MVC
 <li>Validation edits </li>
-<li></li>
-<li></li>
-<li></li>
+<li>ZipCode validator update</li>
+<li>Frontend additions and update</li>
+<li>Validation update on login page and signup page</li>
+<li>Need to work on LogOut option,authenification, Front End for day 6</li>

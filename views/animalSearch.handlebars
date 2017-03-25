@@ -1,7 +1,9 @@
+
  <!-- Navigation -->
 
-     <div class="shadow">
+    <div class="shadow">
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+
      
        <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -13,41 +15,41 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="/">
-                  <img src="../static/images/petfinderLogoSmall.png" alt="">
+                    <img src="../static/images/petfinderLogoSmall.png" alt="">
                 </a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li>
-                        <a href="/login">Login</a>
+                     <li>
+                        <a href="/logout">Logout</a>
                     </li>
                     <li>
-                        <a href="/signup">Sign Up</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
+                        <a href="/contact">Contact</a>
                     </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
-    </nav><div class="container">
+    </nav>
+
+<div class="container">
+
     <div class="row main">
         <div class="main-login main-center">
 
-            <h5>Animal Search for {{username}}</h5>
-            <form class="" method="POST" action="/search/{{username}}">
-
-
+            <h5>Animal Search for {{data.username}}</h5>
+            <form class="" method="POST" action="/search/{{data.username}}">
 
                 <div class="form-group">
                     {{!--<label for="username" class="cols-sm-2 control-label">Animal</label>--}}
                     <div class="cols-sm-10">
                         <label for="sel1">Select animal:</label>
                         <select class="form-control" name="animalType" id="sel1">
-                            <option></option>
+                            {{#if data.animal}}
+                            <option>{{data.animal}}</option>
+                            {{/if}}
                             <option>Cat</option>
                             <option>Dog</option>
                             <option>Horse</option>
@@ -65,7 +67,9 @@
                     <div class="cols-sm-10">
                         <label for="sel1">Age:</label>
                         <select class="form-control" name="animalAge" id="sel1">
-                            <option></option>
+                            {{#if data.age}}
+                            <option>{{data.age}}</option>
+                            {{/if}}
                             <option>Adult</option>
                             <option>Baby</option>
                         </select>
@@ -76,7 +80,9 @@
                     <div class="cols-sm-10">
                         <label for="sel1">Gender:</label>
                         <select class="form-control" name="animalSex" id="sel1">
-                            <option></option>
+                            {{#if data.gender}}
+                            <option>{{data.gender}}</option>
+                            {{/if}}
                             <option>Male</option>
                             <option>Female</option>
                         </select>
@@ -88,7 +94,8 @@
                     <div class="cols-sm-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-home fa-lg" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="zip" id="zip" placeholder="Enter your Zipcode" />
+                            {{!--{{data.zip}}--}}
+                            <input type="text" value="{{data.zip}}" class="form-control" name="zip" id="zip" placeholder="Enter your Zipcode" />
                         </div>
                     </div>
                 </div>
@@ -97,7 +104,7 @@
                 <div class="form-group ">
 
 
-                    <button type="submit" id="button" class=" btn btn-primary btn-lg btn-block login-button ">Search For Animals</button>
+                <button type="submit" id="button" class=" btn btn-primary btn-lg btn-block login-button ">Search For Animals</button>
 
                 </div>
 
@@ -105,4 +112,4 @@
         </div>
     </div>
 </div>
-     </div>
+

@@ -1,7 +1,9 @@
+
  <!-- Navigation -->
 
      <div class="shadow">
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+
      
        <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -19,13 +21,14 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="/login">Login</a>
+                        <a href="/logout">Log Out</a>
                     </li>
                     <li>
-                        <a href="/signup">Sign Up</a>
+                        <a href="/">Contact</a>
                     </li>
                     <li>
-                        <a href="#">Contact</a>
+                    <!-- need to pass in username to add to href=/search/username -->
+                        <a href="/">Search</a>
                     </li>
                 </ul>
             </div>
@@ -33,20 +36,7 @@
         </div>
         <!-- /.container -->
     </nav>
-    
-    {{!--{ petPicture: 'http://photos.petfinder.com/photos/pets/37390667/1/?bust=1486700816&width=500&-x.jpg',
-    descriptsion: 'Thank you for your interest in our adoptable animals. If you would like more information about this pet, see the Shelter information below. We would love to help you rescue a perfect pet!Arturo is
- a wonderful fellow with a very unusual coat! He is mostly black but his sides are a soft brown coloring. This gives him a very distinctive look that is hard to resist. It is also hard to resist snuggling with this
-medium-coated sweetheart. Arturo was picked up as a stray on January 13th. Arturo will be scheduled for neuter shortly after adoption. He seems to be quite kitty friendly so he most likely would fit right in to a mu
-lti-cat family! Come meet this handsome fellow today (closed Tuesdays) and see if he won\'t be a great addition to your family! #1701-0912Virginia Beach Animal Care & Adoption Center has wonderful pets available for
- adoption. As of December 6, all animals are now at the new shelter at 341 Birdneck Road. The former shelter on Leroy Drive is now closed. If you have lost a pet, please visit the shelter in person and often as lost
- animals arrive everyday. Contact Information: Virginia Beach Animal Care & Adoption Center, 341 Birdneck Road, Virginia Beach, VA 23451 Phone 757-385-4444 (x 2) NOTE: In order to help process your request for infor
-mation faster, please refer to the animal\'s intake number, shown next to the photo, rather than the name. This will assist us in locating the information about the animal you are referring to. All our animals are u
-p-to-date on vaccinations and if unaltered, the animal will be spayed or neutered prior to adoption. You do not have to be a resident of Va. Beach to adopt a pet. Please visit these wonderful animals today! March 19
-, 2017, 9:17 pm',
-    phone: '757-385-4444 ',
-    email: 'vbpdac@vbgov.com',
-    address: '341 S. Birdneck Road' },--}}
+
     <div class="container-fluid text-center">
         <div class="jumbotron-fluid">
             <h1>Pets</h1>
@@ -54,9 +44,16 @@ p-to-date on vaccinations and if unaltered, the animal will be spayed or neutere
             <div class="col-lg-3 col-md-4 col-xs-8 thumb crop">
                 <img class="petPicture thumbnail image" width="200px" height="200px" src="{{this.petPicture}}" alt="">
                 <p class="phone">Phone: {{this.phone}}</p>
-                <p>Email: <a href="mailto:{{this.email}}" target="_top">{{this.email}}</a></p> 
-                <p>Address: {{this.address}}</p>
-                <hr>
+                <p>Email: <a href="mailto:{{this.email}}" target ="_top">{{this.email}}</a> </p> 
+                <p>Address: {{this.address}}</p> 
+                <div class="favs">
+                 <!-- need to 1.) find out what the pet id is called and place somewhere in that form (maybe where it is maybe somewhere else) 2.) create a post route for foundAnimals/...so that an entry is recorded in the favorites table. 3.) need to add a boolean to the table? maybe not...but must associate the pet with user and many users may like the same pet so have to change the associations-->
+                    <form action="/foundAimals/{{this.petId}}" method="POST">
+                      <input type="hidden" name="favorite" value="true">
+                      <button type="submit">Favorite!</button>
+                    </form>
+                </div>
+
             </div>
             {{/each}}
         </div>

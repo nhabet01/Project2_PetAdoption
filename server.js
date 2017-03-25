@@ -7,6 +7,17 @@ var path = require('path')
 // Sets up the Express App
 // =============================================================
 var app = express();
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+//allow sessions
+app.use(session({
+    secret: 'app',
+    cookie: { maxAge: 6 * 1000 * 1000 * 1000 * 1000 * 1000 * 1000 },
+    proxy: true,
+    resave: true,
+    saveUninitialized: true
+}));
+app.use(cookieParser());
 var PORT = process.env.PORT || 8080;
 
 
@@ -28,17 +39,16 @@ app.set("view engine", "handlebars");
 
 // Routes =============================================================
 
-// const APIRoutes = require("./routes/api-routes.js")
-const HTMLRouter = require("./routes/html-routes.js")
+// const APIRoutes = require("./routes/apiRoutes.js");
+const HTMLRouter = require("./routes/html-routes.js");
 
+// require("./routes/apiRoutes.js")(app);
+// app.use('/', APIRoutes)
+app.use('/', HTMLRouter);
 
-
-
-app.use('/', HTMLRouter)
-    // app.use('/', APIRoutes)
     // Syncing our sequelize models and then starting our express app
 
-db.sequelize.sync({ force: false }).then(function() {
+db.sequelize.sync({ force: false }).then(function(data, error) {
 
     app.listen(PORT, function() {
         console.log("App listening on PORT " + PORT);

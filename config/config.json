@@ -1,21 +1,21 @@
 {
     "development": {
         "username": "root",
-        "password": "UNCCrugby_49",
+        "password": "learningispower77",
         "database": "pets_development",
         "host": "127.0.0.1",
         "dialect": "mysql"
     },
     "test": {
         "username": "root",
-        "password": "UNCCrugby_49",
+        "password": "Kainer2305!",
         "database": "pets_development",
         "host": "127.0.0.1",
         "dialect": "mysql"
     },
     "production": {
         "username": "root",
-        "password": "UNCCrugby_49",
+        "password": "Kainer2305!",
         "database": "pets_development",
         "host": "127.0.0.1",
         "dialect": "mysql"
