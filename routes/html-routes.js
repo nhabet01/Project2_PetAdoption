@@ -5,7 +5,8 @@ const db = require("../models/")
 var bcrypt = require('bcrypt');
 const saltRounds = 4;
 var zipcode = require('zipcode');
-// var Saltedpass = ' '
+var path = require("path")
+    // var Saltedpass = ' '
 
 // Routes
 
@@ -19,8 +20,8 @@ router.get('/logout', function(req, res) {
 
     req.session.logged_in = false;
     req.session.destroy(function() {
-
-        res.redirect("/");
+        res.sendFile(path.join(__dirname, "/../views/main.handlebars"));
+        // res.redirect("/");
     });
 })
 
@@ -28,11 +29,13 @@ router.get('/logout', function(req, res) {
 
 router.get('/', (req, res) => {
 
-    var data = {
-        hello: ' World'
-    }
+    // var data = {
+    //     hello: ' World'
+    // }
 
-    res.render('main', data);
+    // res.render('main', data);
+    // console.log(path.join(__dirname, "../../views/main.handlebars"))
+    res.sendFile(path.join(__dirname, "../../views/main.handlebars"));
 
 });
 
@@ -109,18 +112,7 @@ router.get('/foundAnimals/:username', (req, res) => {
 });
 
 
-//================ If no matching route is found default to home====================
-// router.use(function(req, res) {
 
-//     res.redirect("/");
-// });
-//===================tried code below as well but doesn't recognize the path/file================
-// router.use(function(req, res) {
-//   //     var data = {
-//   //     hello: ' World'
-//   // }
-//   res.sendFile(path.join(__dirname, "/../views/main.handlebars"));
-// });
 
 
 // ====================POST ROUTES================================
@@ -245,12 +237,20 @@ router.post('/search/:username', (req, res) => {
 });
 
 
-// router.post('/search/:username', (req, res) => {
-//     console.log(req.params.username);
-//     res.redirect(`/foundAnimals/${req.params.username}`);
 
+
+//================ If no matching route is found default to home====================
+// router.use(function(req, res) {
+
+//     res.redirect("/");
 // });
-
+// ===================tried code below as well but doesn't recognize the path/file================
+router.use(function(req, res) {
+    //     var data = {
+    //     hello: ' World'
+    // }
+    res.render(path.join(__dirname, "/../views/main.handlebars"));
+});
 
 
 module.exports = router;
