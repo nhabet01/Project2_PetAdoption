@@ -5,6 +5,7 @@ const db = require("../models/")
 var bcrypt = require('bcrypt');
 const saltRounds = 4;
 var zipcode = require('zipcode');
+var path = require('path');
 // var Saltedpass = ' '
 
 // Routes
@@ -71,7 +72,7 @@ router.get('/search/:username', (req, res) => {
             console.log(params)
                 // res.render('animalSearch', { pets: data });
                 //call findAnimals from within /routes/animalSearchFunction.js
-            res.render('animalSearch', { data: params });
+            res.render('animalSearch', { data: params });//nh: render requires you have a handle
         })
 
     } else {
@@ -107,20 +108,6 @@ router.get('/foundAnimals/:username', (req, res) => {
         res.send('unauthorized')
     }
 });
-
-
-//================ If no matching route is found default to home====================
-// router.use(function(req, res) {
-
-//     res.redirect("/");
-// });
-//===================tried code below as well but doesn't recognize the path/file================
-  // router.use(function(req, res) {
-  //   //     var data = {
-  //   //     hello: ' World'
-  //   // }
-  //   res.sendFile(path.join(__dirname, "/../views/main.handlebars"));
-  // });
 
 
 // ====================POST ROUTES================================
@@ -174,7 +161,7 @@ router.post("/login", function(req, res) {
     console.log('LOGIN')
 
     console.log(req.body.username);
-    console.log(req.body.password);
+    // console.log(req.body.password);
     db.User.findOne({
         where: {
             username: req.body.username
@@ -247,12 +234,19 @@ router.post('/search/:username', (req, res) => {
 });
 
 
-// router.post('/search/:username', (req, res) => {
-//     console.log(req.params.username);
-//     res.redirect(`/foundAnimals/${req.params.username}`);
 
+//================ If no matching route is found default to home====================
+// router.use(function(req, res) {
+
+//     res.redirect("/");
 // });
-
-
+//===================tried code below as well but doesn't recognize the path/file================
+  router.use(function(req, res) {
+    //     var data = {
+    //     hello: ' World'
+    // }
+    console.log(__dirname)
+    res.render(path.join(__dirname, "/../views/main.handlebars"));//nh: res.sendFile sends the client the file, but need a parser when using engines (like handlebars) so must use res.render.
+  });
 
 module.exports = router;
