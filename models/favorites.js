@@ -12,7 +12,7 @@ module.exports = function(sequelize, DataTypes) {
         {
             classMethods: {
                 associate: function(models) {
-                    Favorites.hasMany(models.User, {//changed this to Many:Many association as multiple users may favorite the same pet
+                    Favorites.belongsTo(models.User, {//changed this to Many:Many association as multiple users may favorite the same pet
                         foreignKey: {
                             allowNull: false
                         }
