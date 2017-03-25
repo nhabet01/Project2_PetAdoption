@@ -1,0 +1,12 @@
+^\d{5}(?:[-\s]\d{4})?$
+
+^\d{5}(?:[-\s]\d{4})?$
+^ = Start of the string.
+\d{5} = Match 5 digits (for condition 1, 2, 3)
+(?:…) = Grouping
+[-\s] = Match a space (for condition 3) or a hyphen (for condition 2)
+\d{4} = Match 4 digits (for condition 2, 3)
+…? = The pattern before it is optional (for condition 1)
+$ = End of the string.
+
+var isValidZip = /(^\d{5}$)|(^\d{5}-\d{4}$)/.test("90210");
