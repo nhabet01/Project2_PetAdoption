@@ -14,6 +14,7 @@ module.exports = function(sequelize, DataTypes) {
 
                 type: DataTypes.STRING,
                 allowNull: false,
+                unique:true,
                 
             },
             password: {
@@ -21,13 +22,11 @@ module.exports = function(sequelize, DataTypes) {
                 allowNull: false,
 
             },
-            //This can be generated using javascript/jQuery from a combination of user inputs and sign-up
-            // acctName: {
-            //     type: DataTypes.STRING
-            // },
+
             email: {
                 type: DataTypes.STRING,
                 allowNull: false,
+                unique:true,
                 validate: {
                     isEmail: true, //checks for email format (foo@bar.com) via validators.js & sequelize
 
