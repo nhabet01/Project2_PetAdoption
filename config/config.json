@@ -1,7 +1,10 @@
 {
     "development": {
         "username": "root",
-        "password": "learningispower77",
+        "password": "Kainer2305!",
+
+        "password": "Kainer2305!",
+
         "database": "pets_development",
         "host": "127.0.0.1",
         "dialect": "mysql"
@@ -11,7 +14,7 @@
         "password": "mypassword",
         "database": "pets_development",
         "host": "127.0.0.1",
-        "port" : 3306,
+        "port": 3306,
         "dialect": "mysql"
     },
     "test": {

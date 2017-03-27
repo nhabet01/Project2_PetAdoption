@@ -58,7 +58,7 @@ module.exports = function(sequelize, DataTypes) {
                 allowNull: true,
             }
 
-        },//ADD "," when using classMethods below
+        }, //ADD "," when using classMethods below
         {
             classMethods: {
                 associate: function(models) {
