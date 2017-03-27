@@ -12,6 +12,7 @@ $(document).ready(function() {
         var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
         return regex.test(email);
     }
+
     $('#email').keyup((e) => {
 
         // console.log(e.originalEvent.key)
@@ -45,6 +46,13 @@ $(document).ready(function() {
         // console.log(passwordArr, passwordtoMatch)
     });
 
+    $('body').keyup((e) => {
+        Confurm(email, name, username)
+
+    })
+
+
+
     $('#confirm').keyup((e) => {
 
         // console.log(e.originalEvent.key)
@@ -57,7 +65,6 @@ $(document).ready(function() {
             passwordtoMatch.push(e.originalEvent.key)
         }
         console.log(passwordArr, passwordtoMatch)
-        Confurm(email, name, username)
     });
 
     let Confurm = (email, name, username) => {
@@ -73,11 +80,11 @@ $(document).ready(function() {
 
             } else {
                 console.log('password is not matching')
-
+                $('.btn').prop('disabled', true);
             }
 
         } else {
-
+            $('.btn').prop('disabled', true);
         }
 
     }
