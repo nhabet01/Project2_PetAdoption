@@ -2,20 +2,11 @@
 const express = require("express");
 const router = express.Router();
 var petfinder = require('petfinder')('357d4a946c3d94988341843dbe6abed5', '6b28ab1dc3723180ab6a01aa0491b5fe');
+var chalk = require('chalk');
 
 const API = {
 
-    // <<<<<<< HEAD
-    //     findAminals: (params, cb) => {
-    //         console.log('PARAMS')
-    //         console.log(params);
-    //         let animalType = params.animal.toLowerCase();
-    //         let animalAge = params.age;
-    //         //Slice the first letter of the gender (M or F) as that is all that is needed to query the api 
-    //         let animalSex = params.gender.slice(0, 1);
-    //         let zip = params.zip;
-    //         console.log(animalType, animalAge, animalSex, zip)
-    // =======
+
     findAminals: (params, cb) => {
         console.log('PARAMS')
         console.log(params);
@@ -34,7 +25,7 @@ const API = {
 
                 if (breeds[i].contact.address1 && breeds[i].contact.email && breeds[i].media.photos['1']) {
                     //this is out pet ids
-                    console.log(breeds[i])
+                    // console.log(breeds[i])
 
                     let pet = {
                         petPicture: breeds[i].media.photos['1'].x,
@@ -56,27 +47,45 @@ const API = {
 
     },
 
-    findfav() {
+    //reciev an array of ID's
+    findfav(arrayOfFavs, cb) {
 
-        petfinder.getPet(37624160, {}, function(err, breeds) {
+        var ObjectMaintoCB = []
+
+        arrayOfFavs.forEach(function(element) {
+            //find each pet by id and send it to array with return! 
+            petfinder.getPet(element, {}, function(err, breeds) {
 
 
-            console.log(breeds)
-        })
+                let pet = {
+                    petPicture: breeds.media.photos['1'].x,
+                    descriptsion: breeds.description,
+                    phone: breeds.contact.phone,
+                    email: breeds.contact.email,
+                    address: breeds.contact.address1,
+                    petid: breeds.id, //good,passed to animalSearch.handlebars
+                };
 
-        // petfinder.getPet('37624160', function(data) {
-        //     console.log(data)
-        // })
-        // console.log('boo')
+                // console.log(pet)
+                //return it
+                ObjectMaintoCB.push(pet)
+                if (ObjectMaintoCB.length == arrayOfFavs.length) {
 
-        // petId = 37624160
-        // getPet(petId, {}, function(favPet) {
+                    console.log('boo');
+                    // send data back to routs
+                    cb(ObjectMaintoCB)
+                }
 
-        //     console.log(favPet)
-        // })
+            })
+
+
+        });
+
+
+
     }
 }
-API.findfav();
+
 
 module.exports = API;
 

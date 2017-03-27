@@ -6,6 +6,7 @@ var bcrypt = require('bcrypt');
 const saltRounds = 4;
 var zipcode = require('zipcode');
 var path = require('path');
+var chalk = require('chalk');
 // var Saltedpass = ' '
 
 
@@ -21,8 +22,8 @@ router.get('/logout', function(req, res) {
 
     req.session.logged_in = false;
     req.session.destroy(function() {
-        res.sendFile(path.join(__dirname, "/../views/main.handlebars"));
-        // res.redirect("/");
+        // res.sendFile(path.join(__dirname, "/../views/main.handlebars"));
+        res.redirect("/");
     });
 })
 
@@ -84,6 +85,60 @@ router.get('/search/:username', (req, res) => {
     }
 });
 
+router.get('/favorites/:username', (req, res) => {
+
+    if (req.session.logged_in && req.session.user_name == req.params.username) {
+        // if we create boolean here???//
+        db.User.findOne({
+            where: {
+                username: req.params.username
+            }
+        }).then(function(data) {
+
+            var params = data.dataValues
+            var userobj = {
+                username: params.username,
+                userid: params.id
+            }
+            var favs;
+            /////////////////////////////////////////////////////////FAVORITES
+            db.Favorites.findAll({
+                where: {
+                    UserId: params.id
+                }
+            }).then(function(FavsData) {
+
+
+                if (FavsData.length >= 0) {
+                    //  console.log(chalk.red('FAVS'));
+                    //  console.log(FavsData);
+                    //   console.log(chalk.red('DONE'));
+                    //creating array of favorite ID animals and send it to the API funciton
+                    let IDs = FavsData.map(favobject => `${favobject.animalID}`);
+                    apiMain.findfav(IDs, function(FavsDataReturn) {
+                        //with CB we have result as an array and we can render it on the page! 
+                        favs = FavsDataReturn
+                        res.render('petsOnSearch', { favs: favs, user: userobj });
+                    })
+
+                } else {
+
+                    res.redirect('/')
+                }
+
+            })
+
+        })
+    } else {
+        //we can create some cool unauthorized page! 
+        res.send('unauthorized')
+    }
+
+})
+
+
+
+
 //petsOnSearch.handlebars handler
 router.get('/foundAnimals/:username', (req, res) => {
 
@@ -97,17 +152,47 @@ router.get('/foundAnimals/:username', (req, res) => {
         }).then(function(data) {
 
             var params = data.dataValues
-                //call findAnimals from within /routes/animalSearchFunction.js
+            var favs;
+            /////////////////////////////////////////////////////////FAVORITES
+            db.Favorites.findAll({
+                where: {
+                    UserId: params.id
+                }
+            }).then(function(FavsData) {
+                if (FavsData.length >= 0) {
+                    //  console.log(chalk.red('FAVS'));
+                    //  console.log(FavsData);
+                    //   console.log(chalk.red('DONE'));
+                    let IDs = FavsData.map(favobject => `${favobject.animalID}`);
+                    apiMain.findfav(IDs, function(FavsDataReturn) {
+
+                        favs = FavsDataReturn
+                    })
+                } else {
+
+                    console.log('no favorites Yet')
+                }
+
+
+
+
+            })
+
+
+
+            //call findAnimals from within /routes/animalSearchFunction.js
             apiMain.findAminals(params, function(data) { //nh: function(data)=cb in animalSearchFunction.js
                 console.log('FUNN')
                 var userobj = {
-                    username: params.username,
-                    userid: params.id
-                }
-                console.log("userobj:" + userobj.username + "-" + userobj.userid)
-                    // console.log(data)
-                    //{pets:data} pets is the handler passed to handlebars, data is the info to be displayed.
+                        username: params.username,
+                        userid: params.id
+                    }
+                    // console.log("userobj:" + userobj.username + "-" + userobj.userid)
+
                 res.render('petsOnSearch', { pets: data, user: userobj });
+                // console.log(data)
+                //{pets:data} pets is the handler passed to handlebars, data is the info to be displayed.
+                // res.render('petsOnSearch', { pets: data, user: userobj });
             })
 
         })
