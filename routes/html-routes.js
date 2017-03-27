@@ -256,6 +256,42 @@ router.post('/search/:username', (req, res) => {
 
 // });
 
+//---gilbert's 
+router.post("/favAnimals", function(req, res) {
+    console.log('Inserting favorited pet one at a time in the background....');
+    //console.log(`petid: ${petId} username: ${username}  userid: ${userid}`);
+    // console.log(req.body);
+     var str = req.body.favorite;
+     var str2 = str.slice(str.indexOf("$")+1);
+     var petid = str.slice(0,str.indexOf("$"));
+     var usrid = str2.slice(0,str2.indexOf("$"));
+     var usrname = str2.slice(str2.indexOf("$")+1);
+     console.log(`petid=${petid}`);
+     console.log(`usrid=${usrid}`);
+     console.log(`usrname=${usrname}`);
+     var userid = parseInt(usrid);
+   
+   db.Favorites.findOne({
+            where: {
+                animalID: petid,
+                UserId: userid
+            }
+    }).then(function(data) {
+        if (data) {
+            console.log(" this favorite already exists...");
+        } else {
+            db.Favorites.create({ 
+                animalID: petid,
+                UserId: userid
+            }).then(function(data) {
+               // console.log(data);
+               console.log(" this favorite is added...");
+            });
+        }
+        
+    })
+
+});
 
 
 module.exports = router;

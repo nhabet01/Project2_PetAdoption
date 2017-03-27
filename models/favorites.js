@@ -8,6 +8,10 @@ module.exports = function(sequelize, DataTypes) {
                     type: DataTypes.STRING,//need to confirm id is stored as a string
                     allowNull: false
             },
+            UserId: {
+                    type: DataTypes.INTEGER,//need to confirm id is stored as a string
+                    allowNull: false
+            },
         },
         {
             classMethods: {
