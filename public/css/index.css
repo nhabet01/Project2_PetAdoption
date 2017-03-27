@@ -198,3 +198,8 @@ footer {
 
 img {
     object-fit: cover;
+}
+
+.btn-lg {
+    background-color: #ff6633;
+}
