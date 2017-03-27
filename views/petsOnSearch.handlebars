@@ -29,7 +29,7 @@
                     </li>
                     <li>
                     <!-- need to pass in username to add to href=/search/username -->
-                        <a href="/">Search</a>
+                        <a href="/search/{{user.username}}">Search</a>
                     </li>
                     
                      <li>
@@ -52,7 +52,11 @@
 
 
            <p>user:{{user.username}} userid:{{user.userid}} </p> 
-
+                                    {{#if Nofavs}}
+                                        <h1>{{Nofavs}}</h1>
+                    
+                    
+                                       {{/if}}
            {{#if favs }}
                         <h3>   Your Favorites </h3>
                 {{#each favs}}
@@ -61,10 +65,17 @@
                 <p class="phone">Phone: {{this.phone}}</p>
                 <p>Email: <a href="mailto:{{this.email}}" target ="_top">{{this.email}}</a> </p> 
                 <p>Address: {{this.address}}</p>
+                <form method="POST" action="/favorites/{{../user.userid}}/{{../user.username}}/{{this.petid}}?_method=DELETE">
+  <button type="submit">Delete resource</button>
+</form>
 
             </div>
                 {{/each}}
            {{/if}}
+
+
+
+
            {{#if pets}} 
                     <h3> We Found Animals in your area!  </h3> 
                     {{/if}}
@@ -78,7 +89,7 @@
 
                 <div class="favs">
                  <!-- need to 1.) find out what the pet id is called and place somewhere in that form (maybe where it is maybe somewhere else) 2.) create a post route for foundAnimals/...so that an entry is recorded in the favorites table. 3.) need to add a boolean to the table? maybe not...but must associate the pet with user and many users may like the same pet so have to change the associations-->
-                    <form action="/favAnimals" method="POST">
+                    <form action="/favAnimals/" method="POST">
                       <input type="hidden" name="favorite" value="{{this.petid}}${{this.petuserid}}${{this.petusername}}">
                       <button type="submit">Favorite!</button>
                     </form>

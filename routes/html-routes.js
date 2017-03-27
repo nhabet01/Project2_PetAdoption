@@ -61,6 +61,7 @@ router.get('/login', (req, res) => {
 //animalSearch.handlbars handler
 //Search page only accessible to users who have signed up
 router.get('/search/:username', (req, res) => {
+    console.log('I WSS SEARCHING')
     console.log(req.params.username);
 
 
@@ -84,6 +85,26 @@ router.get('/search/:username', (req, res) => {
         res.send('unauthorized!')
     }
 });
+
+
+router.delete('/favorites/:userId/:userName/:petid', (req, res) => {
+
+    console.log(req.params)
+
+    db.Favorites.destroy({
+        animalID: req.params.petid,
+        where: {
+            animalID: req.params.petid,
+            UserId: req.params.userId
+        }
+    }).then(function(done) {
+
+        res.redirect(`/favorites/${req.params.userName}`)
+    })
+
+})
+
+
 
 router.get('/favorites/:username', (req, res) => {
 
@@ -109,7 +130,7 @@ router.get('/favorites/:username', (req, res) => {
             }).then(function(FavsData) {
 
 
-                if (FavsData.length >= 0) {
+                if (FavsData.length > 0) {
                     //  console.log(chalk.red('FAVS'));
                     //  console.log(FavsData);
                     //   console.log(chalk.red('DONE'));
@@ -123,7 +144,7 @@ router.get('/favorites/:username', (req, res) => {
 
                 } else {
 
-                    res.redirect('/')
+                    res.render('petsOnSearch', { Nofavs: 'No Favorites yet!', user: userobj });
                 }
 
             })
@@ -353,6 +374,7 @@ router.post("/favAnimals", function(req, res) {
     }).then(function(data) {
         if (data) {
             console.log(" this favorite already exists...");
+            res.redirect(`/foundAnimals/${usrname}`)
         } else {
             db.Favorites.create({
                 animalID: petid,
@@ -360,6 +382,7 @@ router.post("/favAnimals", function(req, res) {
             }).then(function(data) {
                 // console.log(data);
                 console.log(" this favorite is added...");
+                res.redirect(`/foundAnimals/${usrname}`)
             });
         }
 
