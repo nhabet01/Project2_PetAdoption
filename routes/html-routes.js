@@ -5,7 +5,10 @@ const db = require("../models/")
 var bcrypt = require('bcrypt');
 const saltRounds = 4;
 var zipcode = require('zipcode');
+var path = require('path');
+var chalk = require('chalk');
 // var Saltedpass = ' '
+
 
 // Routes
 
@@ -18,21 +21,23 @@ var zipcode = require('zipcode');
 router.get('/logout', function(req, res) {
 
     req.session.logged_in = false;
-    req.session.destroy(function(){
-    
-        res.redirect("/");  
-    });  
+    req.session.destroy(function() {
+        // res.sendFile(path.join(__dirname, "/../views/main.handlebars"));
+        res.redirect("/");
+    });
 })
 
 
 
 router.get('/', (req, res) => {
 
-    var data = {
-        hello: ' World'
-    }
+    // var data = {
+    //     hello: ' World'
+    // }
 
-    res.render('main', data);
+    // res.render('main', data);
+    // console.log(path.join(__dirname, "../../views/main.handlebars"))
+    res.render(path.join(__dirname, "/../views/main.handlebars"));
 
 });
 
@@ -56,6 +61,7 @@ router.get('/login', (req, res) => {
 //animalSearch.handlbars handler
 //Search page only accessible to users who have signed up
 router.get('/search/:username', (req, res) => {
+    console.log('I WSS SEARCHING')
     console.log(req.params.username);
 
 
@@ -71,7 +77,7 @@ router.get('/search/:username', (req, res) => {
             console.log(params)
                 // res.render('animalSearch', { pets: data });
                 //call findAnimals from within /routes/animalSearchFunction.js
-            res.render('animalSearch', { data: params });
+            res.render('animalSearch', { data: params }); //nh: render requires you have a handle
         })
 
     } else {
@@ -80,8 +86,83 @@ router.get('/search/:username', (req, res) => {
     }
 });
 
+
+router.delete('/favorites/:userId/:userName/:petid', (req, res) => {
+
+    console.log(req.params)
+
+    db.Favorites.destroy({
+        animalID: req.params.petid,
+        where: {
+            animalID: req.params.petid,
+            UserId: req.params.userId
+        }
+    }).then(function(done) {
+
+        res.redirect(`/favorites/${req.params.userName}`)
+    })
+
+})
+
+
+
+router.get('/favorites/:username', (req, res) => {
+
+    if (req.session.logged_in && req.session.user_name == req.params.username) {
+        // if we create boolean here???//
+        db.User.findOne({
+            where: {
+                username: req.params.username
+            }
+        }).then(function(data) {
+
+            var params = data.dataValues
+            var userobj = {
+                username: params.username,
+                userid: params.id
+            }
+            var favs;
+            /////////////////////////////////////////////////////////FAVORITES
+            db.Favorites.findAll({
+                where: {
+                    UserId: params.id
+                }
+            }).then(function(FavsData) {
+
+
+                if (FavsData.length > 0) {
+                    //  console.log(chalk.red('FAVS'));
+                    //  console.log(FavsData);
+                    //   console.log(chalk.red('DONE'));
+                    //creating array of favorite ID animals and send it to the API funciton
+                    let IDs = FavsData.map(favobject => `${favobject.animalID}`);
+                    apiMain.findfav(IDs, function(FavsDataReturn) {
+                        //with CB we have result as an array and we can render it on the page! 
+                        favs = FavsDataReturn
+                        res.render('petsOnSearch', { favs: favs, user: userobj });
+                    })
+
+                } else {
+
+                    res.render('petsOnSearch', { Nofavs: 'No Favorites yet!', user: userobj });
+                }
+
+            })
+
+        })
+    } else {
+        //we can create some cool unauthorized page! 
+        res.send('unauthorized')
+    }
+
+})
+
+
+
+
 //petsOnSearch.handlebars handler
 router.get('/foundAnimals/:username', (req, res) => {
+
     // if person LOGGED IN THEN WE CAN ONLY ACCES THE DATA!!!!
     if (req.session.logged_in && req.session.user_name == req.params.username) {
         // if we create boolean here???//
@@ -92,13 +173,47 @@ router.get('/foundAnimals/:username', (req, res) => {
         }).then(function(data) {
 
             var params = data.dataValues
+            var favs;
+            /////////////////////////////////////////////////////////FAVORITES
+            db.Favorites.findAll({
+                where: {
+                    UserId: params.id
+                }
+            }).then(function(FavsData) {
+                if (FavsData.length >= 0) {
+                    //  console.log(chalk.red('FAVS'));
+                    //  console.log(FavsData);
+                    //   console.log(chalk.red('DONE'));
+                    let IDs = FavsData.map(favobject => `${favobject.animalID}`);
+                    apiMain.findfav(IDs, function(FavsDataReturn) {
+
+                        favs = FavsDataReturn
+                    })
+                } else {
+
+                    console.log('no favorites Yet')
+                }
+
+
+
+
+            })
+
+
 
             //call findAnimals from within /routes/animalSearchFunction.js
             apiMain.findAminals(params, function(data) { //nh: function(data)=cb in animalSearchFunction.js
                 console.log('FUNN')
-                    // console.log(data)
-                    //{pets:data} pets is the handler passed to handlebars, data is the info to be displayed.
-                res.render('petsOnSearch', { pets: data });
+                var userobj = {
+                        username: params.username,
+                        userid: params.id
+                    }
+                    // console.log("userobj:" + userobj.username + "-" + userobj.userid)
+
+                res.render('petsOnSearch', { pets: data, user: userobj });
+                // console.log(data)
+                //{pets:data} pets is the handler passed to handlebars, data is the info to be displayed.
+                // res.render('petsOnSearch', { pets: data, user: userobj });
             })
 
         })
@@ -107,20 +222,6 @@ router.get('/foundAnimals/:username', (req, res) => {
         res.send('unauthorized')
     }
 });
-
-
-//================ If no matching route is found default to home====================
-// router.use(function(req, res) {
-
-//     res.redirect("/");
-// });
-//===================tried code below as well but doesn't recognize the path/file================
-  // router.use(function(req, res) {
-  //   //     var data = {
-  //   //     hello: ' World'
-  //   // }
-  //   res.sendFile(path.join(__dirname, "/../views/main.handlebars"));
-  // });
 
 
 // ====================POST ROUTES================================
@@ -157,14 +258,13 @@ router.post("/signup", function(req, res) {
                     // res.redirect('/', data.dataValues.username)
             })
             .catch(function(error) {
-                    if (error) {
-                        console.log(error.message)
-                        var data = { baderror: error.message }
-                        res.render('signup', data)
-                    }
-
+                if (error) {
+                    console.log(error.message)
+                    var data = { baderror: error.message }
+                    res.render('signup', data)
                 }
-            );
+
+            });
     });
 });
 
@@ -174,7 +274,7 @@ router.post("/login", function(req, res) {
     console.log('LOGIN')
 
     console.log(req.body.username);
-    console.log(req.body.password);
+    // console.log(req.body.password);
     db.User.findOne({
         where: {
             username: req.body.username
@@ -231,7 +331,6 @@ router.post('/search/:username', (req, res) => {
             return
         }
 
-
         // animal | age  | gender
         db.User.update({ zip: req.body.zip, animal: req.body.animalType, age: req.body.animalAge, gender: req.body.animalSex }, {
             where: { username: req.params.username }
@@ -247,12 +346,60 @@ router.post('/search/:username', (req, res) => {
 });
 
 
-// router.post('/search/:username', (req, res) => {
-//     console.log(req.params.username);
-//     res.redirect(`/foundAnimals/${req.params.username}`);
 
+
+//================ If no matching route is found default to home====================
+// router.use(function(req, res) {
+
+//---gilbert's 
+router.post("/favAnimals", function(req, res) {
+    console.log('Inserting favorited pet one at a time in the background....');
+    //console.log(`petid: ${petId} username: ${username}  userid: ${userid}`);
+    // console.log(req.body);
+    var str = req.body.favorite;
+    var str2 = str.slice(str.indexOf("$") + 1);
+    var petid = str.slice(0, str.indexOf("$"));
+    var usrid = str2.slice(0, str2.indexOf("$"));
+    var usrname = str2.slice(str2.indexOf("$") + 1);
+    console.log(`petid=${petid}`);
+    console.log(`usrid=${usrid}`);
+    console.log(`usrname=${usrname}`);
+    var userid = parseInt(usrid);
+
+    db.Favorites.findOne({
+        where: {
+            animalID: petid,
+            UserId: userid
+        }
+    }).then(function(data) {
+        if (data) {
+            console.log(" this favorite already exists...");
+            res.redirect(`/foundAnimals/${usrname}`)
+        } else {
+            db.Favorites.create({
+                animalID: petid,
+                UserId: userid
+            }).then(function(data) {
+                // console.log(data);
+                console.log(" this favorite is added...");
+                res.redirect(`/foundAnimals/${usrname}`)
+            });
+        }
+
+    })
+
+});
+
+//     res.redirect("/");
 // });
+// ===================tried code below as well but doesn't recognize the path/file================
+router.use(function(req, res) {
+    //     var data = {
+    //     hello: ' World'
+    // }
+    res.render(path.join(__dirname, "/../views/main.handlebars"));
+});
 
-
-
+//================ If no matching route is found default to home====================
+// router.use(function(req, res) {
 module.exports = router;

@@ -14,19 +14,17 @@ module.exports = function(sequelize, DataTypes) {
 
                 type: DataTypes.STRING,
                 allowNull: false,
+                unique:true,
             },
             password: {
                 type: DataTypes.STRING,
                 allowNull: false,
-
             },
-            //This can be generated using javascript/jQuery from a combination of user inputs and sign-up
-            // acctName: {
-            //     type: DataTypes.STRING
-            // },
+
             email: {
                 type: DataTypes.STRING,
                 allowNull: false,
+                unique:true,
                 validate: {
                     isEmail: true, //checks for email format (foo@bar.com) via validators.js & sequelize
 
@@ -57,7 +55,7 @@ module.exports = function(sequelize, DataTypes) {
                 allowNull: true,
             }
 
-        },//ADD "," when using classMethods below
+        }, //ADD "," when using classMethods below
         {
             classMethods: {
                 associate: function(models) {

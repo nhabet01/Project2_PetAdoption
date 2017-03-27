@@ -69,3 +69,20 @@ Create a migration strategy for sharing data across teammembers.
 <li>Frontend additions and update</li>
 <li>Validation update on login page and signup page</li>
 <li>Need to work on LogOut option,authenification, Front End for day 6</li>
+
+# Day 6 Group Project Sequlizer CRUD, MVC
+<li>added session.destroy </li>
+<li>update navigation links</li>
+<li>Added logout functionality</li>
+
+# Day 7 Group Project Sequlizer CRUD, MVC
+<li>update routes to home for undefined routes </li>
+<li>update navigation links</li>
+<li>updated front end: uniform display sizes</li>
+<li>need to work on favorites: send user&favorite data, create favorites page</li>
+
+# Day 7 Group Project Sequlizer CRUD, MVC
+<li>Gilbert did insert data on favorites click </li>      
+<li>Created Favorites rout using searched pets - DZ</li>
+<li>Will work on delete from favorites function tomorrow - DZ</li>
+<li>Need get on Frond End and still need validation for password match on signup pahe - DZ</li>
