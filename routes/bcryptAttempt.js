@@ -65,7 +65,7 @@
 //     })
 
 
-});
+// });
 //option 3: needed to add a promise:bcrypt.hash(req.body.password, saltRounds).then( function(hash)
 router.post("/signup", function(req, res) {
     console.log('SIGNUP')

@@ -15,12 +15,10 @@ module.exports = function(sequelize, DataTypes) {
                 type: DataTypes.STRING,
                 allowNull: false,
                 unique:true,
-                
             },
             password: {
                 type: DataTypes.STRING,
                 allowNull: false,
-
             },
 
             email: {
@@ -57,7 +55,7 @@ module.exports = function(sequelize, DataTypes) {
                 allowNull: true,
             }
 
-        },//ADD "," when using classMethods below
+        }, //ADD "," when using classMethods below
         {
             classMethods: {
                 associate: function(models) {

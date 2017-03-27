@@ -82,6 +82,7 @@ Create a migration strategy for sharing data across teammembers.
 <li>need to work on favorites: send user&favorite data, create favorites page</li>
 
 # Day 7 Group Project Sequlizer CRUD, MVC
-<li></li>
-<li></li>
-<li></li>
+<li>Gilbert did insert data on favorites click </li>      
+<li>Created Favorites rout using searched pets - DZ</li>
+<li>Will work on delete from favorites function tomorrow - DZ</li>
+<li>Need get on Frond End and still need validation for password match on signup pahe - DZ</li>
