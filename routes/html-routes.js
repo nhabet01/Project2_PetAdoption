@@ -288,9 +288,9 @@ router.post("/favAnimals", function(req, res) {
                console.log(" this favorite is added...");
             });
         }
-        
+        return;
     })
-
+  
 });
 
 
