@@ -100,9 +100,14 @@ router.get('/foundAnimals/:username', (req, res) => {
                 //call findAnimals from within /routes/animalSearchFunction.js
             apiMain.findAminals(params, function(data) { //nh: function(data)=cb in animalSearchFunction.js
                 console.log('FUNN')
+                var userobj = {
+                    username: params.username,
+                    userid: params.id
+                }
+                console.log("userobj:" + userobj.username + "-" + userobj.userid)
                     // console.log(data)
                     //{pets:data} pets is the handler passed to handlebars, data is the info to be displayed.
-                res.render('petsOnSearch', { pets: data });
+                res.render('petsOnSearch', { pets: data, user: userobj });
             })
 
         })
@@ -239,6 +244,43 @@ router.post('/search/:username', (req, res) => {
 
 //================ If no matching route is found default to home====================
 // router.use(function(req, res) {
+
+//---gilbert's 
+router.post("/favAnimals", function(req, res) {
+    console.log('Inserting favorited pet one at a time in the background....');
+    //console.log(`petid: ${petId} username: ${username}  userid: ${userid}`);
+    // console.log(req.body);
+    var str = req.body.favorite;
+    var str2 = str.slice(str.indexOf("$") + 1);
+    var petid = str.slice(0, str.indexOf("$"));
+    var usrid = str2.slice(0, str2.indexOf("$"));
+    var usrname = str2.slice(str2.indexOf("$") + 1);
+    console.log(`petid=${petid}`);
+    console.log(`usrid=${usrid}`);
+    console.log(`usrname=${usrname}`);
+    var userid = parseInt(usrid);
+
+    db.Favorites.findOne({
+        where: {
+            animalID: petid,
+            UserId: userid
+        }
+    }).then(function(data) {
+        if (data) {
+            console.log(" this favorite already exists...");
+        } else {
+            db.Favorites.create({
+                animalID: petid,
+                UserId: userid
+            }).then(function(data) {
+                // console.log(data);
+                console.log(" this favorite is added...");
+            });
+        }
+
+    })
+
+});
 
 //     res.redirect("/");
 // });

@@ -3,11 +3,17 @@ var validator = require('validator');
 
 module.exports = function(sequelize, DataTypes) {
     var Favorites = sequelize.define("Favorites", {
-        //sequelize automatically adds ID as primary key and auto increments
+
         animalID: {
             type: DataTypes.STRING, //need to confirm id is stored as a string
             allowNull: false
         },
+        UserId: {
+            type: DataTypes.INTEGER, //need to confirm id is stored as a string
+            allowNull: false
+        },
+        // >>>>>>> Gilbert
+        // },
     }, {
         classMethods: {
             associate: function(models) {
