@@ -1,5 +1,6 @@
 
  <!-- Navigation -->
+ <script src="../static/js/foundAnimals.js"></script>
  <link rel="stylesheet" href="../static/css/foundAndFav.css">
      <div class="shadow">
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -46,19 +47,21 @@
 
     <div class="container-fluid text-center">
         <div class="jumbotron-fluid">
-            <h1>Pets</h1>
+            {{!--<h1>Pets</h1>--}}
+      <div class="col-md-12">
+                <img class=" logo img-responsive img-rounded" src="../static/images/paw.png" alt="Adopt">
+            </div>
 
 
 
-
-           <p>{{user.username}}'s favorites userid:{{user.userid}} </p> <!-- If user ID not needed to pass info along then will not include here -->
+           {{!--<p>{{user.username}}'s favorites userid:{{user.userid}} </p> <!-- If user ID not needed to pass info along then will not include here -->--}}
                                     {{#if Nofavs}}
-                                        <h1>{{Nofavs}}</h1>
+                                        <h1 class="foundAnimsLogo">{{Nofavs}}</h1>
                     
                     
                                        {{/if}}
            {{#if favs }}
-                        <h3>   Your Favorites </h3>
+                        <h3 class="foundAnimsLogo">   Your Favorites </h3>
                 {{#each favs}}
                              <div class=" favorites col-lg-3 col-md-4 col-xs-8 thumb crop">
                 <img class="petPicture thumbnail" width="300px" height="300px" src="{{this.petPicture}}" alt="">
@@ -77,7 +80,7 @@
 
 
            {{#if pets}} 
-                    <h3> We Found Animals in your area!  </h3> 
+                    <h3 class="foundAnimsLogo"> We Found Animals in your area!  </h3> 
                     {{/if}}
             {{#each pets}}
 
