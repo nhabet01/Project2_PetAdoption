@@ -1,0 +1,63 @@
+video {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    /*z-index: -100;*/
+    transform: translateX(-50%) translateY(-50%);
+    /*background: url('//demosthenes.info/assets/images/polina.jpg') no-repeat;*/
+    background-size: cover;
+    transition: 1s opacity;
+}
+
+.logo {
+    opacity: 0.7;
+}
+
+
+/* Smartphones (portrait) ----------- */
+
+
+/*@media only screen and (max-width: 320px) {
+    .video {
+        display: none;
+    }
+}*/
+
+
+/*font-family: 'Baloo Bhaina',
+cursive;
+font-family: 'Delius Unicase',
+cursive;
+font-family: 'Chewy',
+cursive;
+font-family: 'Gabriela',
+serif;
+font-family: 'Kite One',
+sans-serif;*/
+
+.adaption {
+    font-family: 'Gabriela';
+    font-size: 56px;
+    margin-bottom: -150px;
+    font-weight: bold;
+}
+
+
+/* Smartphones (landscape) ----------- */
+
+@media (max-width: 736px) {
+    .adaption {
+        font-family: 'Gabriela';
+        font-size: 24px;
+        margin-bottom: -210px;
+    }
+    .logo {
+        opacity: 0.9;
+        width: 50%;
+        height: 50%;
+    }
+}

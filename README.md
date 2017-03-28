@@ -92,3 +92,8 @@ Create a migration strategy for sharing data across teammembers.
 <li>Modals for pet info</li>
 <li>Delete from Favorites</li>
 <li>Password Match validation</li>
+
+<li>Front End  - 80% Done -DZ </li>      
+<li>Validation - moved to back End</li>
+<li>Need Poop up for images with data</li>
+
