@@ -1,11 +1,7 @@
 {
     "development": {
         "username": "root",
-<<<<<<< HEAD
-        "password": "",
-=======
-        "password": "Kainer2305!",
->>>>>>> Dzmitry
+        "password": "learningispower77",
         "database": "pets_development",
         "host": "127.0.0.1",
         "dialect": "mysql"

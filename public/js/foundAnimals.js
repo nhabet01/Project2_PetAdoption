@@ -1,10 +1,9 @@
 $(document).ready(function() {
 
-    $('.adaption').circleType({ radius: 384 });
+    $('.foundAnimsLogo').circleType({ radius: 384 });
 
     $('.logo').on('click', () => {
         console.log('hello')
-        window.location.href = '/login'
 
     })
     $('.logo').on('mouseover', () => {
