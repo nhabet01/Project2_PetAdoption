@@ -90,7 +90,7 @@ router.get('/search/:username', (req, res) => {
 router.delete('/favorites/:userId/:userName/:petid', (req, res) => {
 
     console.log(req.params)
-
+    console.log('DESTROY')
     db.Favorites.destroy({
         animalID: req.params.petid,
         where: {
@@ -229,43 +229,48 @@ router.post("/signup", function(req, res) {
     console.log('SIGNUP')
 
     console.log(req.body)
+    if (req.body.password != req.body.confirm) {
+        console
+        res.render('signup', { PassworBad: 'Your password is not matching!' })
+    } else {
+        bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+            // console.log(hash)
+
+            db.User.create({
+                    name: req.body.name,
+                    username: req.body.username,
+                    password: hash,
+                    email: req.body.email
 
 
-    bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
-        // console.log(hash)
+                }).then(function(data, err) {
+                    // console.log(data.dataValues)
+                    console.log(err)
+                    console.log('good')
 
-        db.User.create({
-                name: req.body.name,
-                username: req.body.username,
-                password: hash,
-                email: req.body.email
-
-
-            }).then(function(data, err) {
-                // console.log(data.dataValues)
-                console.log(err)
-                console.log('good')
-
-                // when person sigins up we authorize it
-                //and have acces to email and username NOT password keep it hashED
-                req.session.logged_in = true;
-                req.session.user_name = req.body.username;
-                req.session.user_email = req.body.email;
+                    // when person sigins up we authorize it
+                    //and have acces to email and username NOT password keep it hashED
+                    req.session.logged_in = true;
+                    req.session.user_name = req.body.username;
+                    req.session.user_email = req.body.email;
 
 
-                // we give a session token  and user has access to it during the visit until they log out! 
-                res.redirect(`/search/${req.session.user_name}`)
-                    // res.redirect('/', data.dataValues.username)
-            })
-            .catch(function(error) {
-                if (error) {
-                    console.log(error.message)
-                    var data = { baderror: error.message }
-                    res.render('signup', data)
-                }
+                    // we give a session token  and user has access to it during the visit until they log out! 
+                    res.redirect(`/search/${req.session.user_name}`)
+                        // res.redirect('/', data.dataValues.username)
+                })
+                .catch(function(error) {
+                    if (error) {
+                        console.log(error.message)
+                        var data = { baderror: error.message }
+                        res.render('signup', data)
+                    }
 
-            });
-    });
+                });
+        });
+    }
+
+
 });
 
 
