@@ -53,7 +53,7 @@
             </div>
 
 
-           <p class="usertag">{{user.username}}'s favorites </p> <!-- If user ID not needed to pass info along then will not include here -->
+           {{!-- <p class="usertag">{{user.username}}'s favorites </p>  --}}<!-- If user ID not needed to pass info along then will not include here -->
            {{!--<p>{{user.username}}'s favorites userid:{{user.userid}} </p> <!-- If user ID not needed to pass info along then will not include here -->--}}
 
                                     {{#if Nofavs}}
@@ -62,7 +62,7 @@
                     
                                        {{/if}}
            {{#if favs }}
-                        <h3 class="foundAnimsLogo">   Your Favorites </h3>
+                        <h3 class="foundAnimsLogo">   {{user.username}}'s Favorites </h3>
                 {{#each favs}}
                              <div class=" favorites col-lg-3 col-md-4 col-xs-8 thumb crop">
                 <img class="petPicture thumbnail" width="300px" height="300px" src="{{this.petPicture}}" alt="">
