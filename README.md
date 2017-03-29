@@ -89,12 +89,10 @@ Create a migration strategy for sharing data across teammembers.
 
 # Day 8 Group Project Sequlizer CRUD, MVC
 <li>Contact page </li>      
-<li>Modals for pet info initiated</li>
+<li>Modals for pet info</li>
 <li>Delete from Favorites</li>
 <li>Password Match validation</li>
-<li>Front End  - 80% Done </li>      
-<li>Validation - moved to back End</li>
-<li>Need Popup up for images with data</li>
+
 
 # Day 9 Group Project Sequlizer CRUD, MVC
 <li>Contact page </li>      
@@ -102,4 +100,9 @@ Create a migration strategy for sharing data across teammembers.
 <li></li>      
 <li></li>
 <li></li>
+
+<li>Front End  - 80% Done -DZ </li>      
+<li>Validation - moved to back End</li>
+<li>Need Poop up for images with data</li>
+
 
