@@ -1,11 +1,10 @@
 
 <!-- Navigation -->
 <script src ="static/js/signup.js" ></script><!-- why the static path? -->
-	<link rel="stylesheet" href="/static/css/signup.css">
-     <div class="shadow">
+<link rel="stylesheet" href="/static/css/signup.css">
+<div class="shadow">
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-			
-       <div class="container">
+	    <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -36,113 +35,43 @@
         </div>
         <!-- /.container -->
     </nav>
-	{{!--<div class="container">
-			<div class="row main">
-				<div class="main-login main-center">
-				<h5>Sign up to view pets in your area.</h5>
-					<form class="" method="POST" action="/signup" >
-						{{#if baderror}}
-							<h1> Wrong!</h1>
+	
+    <form class="" method="POST" action="/signup" >
+        <div class="login-wrap">
+            <div class="login-html">
+                <input id="tab-2" type="radio" name="tab" class="sign-up" checked><label for="tab-2" class="tab">Sign Up</label>
+                <div class="login-form">
+                    <div class="sign-up-htm text-center">
+						{{#if BadPassword}}
+						<h4 class="BadPass">{{BadPassword}}</h4>
 						{{/if}}
-
-						<row><div class="form-group">
-							<label for="name" class="cols-sm-2 control-label">Your Name</label>
-							<div class="cols-sm-2">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="name" id="name"  placeholder="Enter your Name"/>
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label for="email" class="cols-sm-2 control-label">Your Email</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="email" id="email"  placeholder="Enter your Email"/>
-								</div>
-							</div>
-						</div>
-
-						</row>
-
-						<div class="form-group">
-							<label for="username" class="cols-sm-2 control-label">Username</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="username" id="username"  placeholder="Enter your Username"/>
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label for="password" class="cols-sm-2 control-label">Password</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-									<input type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password"/>
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-									<input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Confirm your Password"/>
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group ">
-                            <button type="submit" id="button" class="btn btn-primary btn-lg btn-block login-button" >Register</button>
-						</div>
-						
-					</form>
-				</div>
-			</div>
-		</div>
-     </div>
-
-</div>--}}
-<form class="" method="POST" action="/signup" >
-            <div class="login-wrap">
-    <div class="login-html">
-        <input id="tab-2" type="radio" name="tab" class="sign-up" checked><label for="tab-2" class="tab">Sign Up</label>
-        <div class="login-form">
-            <div class="sign-up-htm text-center">
-						{{#if PassworBad}}
-						<h4 class="BadPass">{{PassworBad}}</h4>
-						{{/if}}
-				          <div class="group">
-                    <label for="user" class="label">Name</label>
-                    <input id="user" type="text" name="name"  class="input">
+        				<div class="group">
+                            <label for="user" class="label">Name</label>
+                            <input id="user" type="text" name="name"  class="input">
+                        </div>
+                        <div class="group">
+                            <label for="user" class="label">Username</label>
+                            <input id="user" type="text" name="username"  class="input">
+                        </div>
+                        <div class="group">
+                            <label for="pass" class="label">Password</label>
+                            <input id="pass" type="password" id="password" name="password"  class="input" data-type="password">
+                        </div>
+                        <div class="group">
+                            <label for="pass" class="label">Repeat Password</label>
+                            <input id="pass" type="password" class="input" name="confirm" data-type="password">
+                        </div>
+                        <div class="group">
+                            <label for="pass" class="label">Email Address</label>
+                            <input id="pass" type="text" name="email" class="input">
+                        </div>
+                        <div class="group">
+                            <input type="submit" class="button" value="Sign Up">
+                        </div>
+                        <div class="hr"></div>
+                    </div>
                 </div>
-                <div class="group">
-                    <label for="user" class="label">Username</label>
-                    <input id="user" type="text" name="username"  class="input">
-                </div>
-                <div class="group">
-                    <label for="pass" class="label">Password</label>
-                    <input id="pass" type="password" id="password" name="password"  class="input" data-type="password">
-                </div>
-                <div class="group">
-                    <label for="pass" class="label">Repeat Password</label>
-                    <input id="pass" type="password" class="input" name="confirm" data-type="password">
-                </div>
-                <div class="group">
-                    <label for="pass" class="label">Email Address</label>
-                    <input id="pass" type="text" name="email" class="input">
-                </div>
-                <div class="group">
-                    <input type="submit" class="button" value="Sign Up">
-                </div>
-                <div class="hr"></div>
             </div>
         </div>
-    </div>
+    </form>
 </div>
-</form>

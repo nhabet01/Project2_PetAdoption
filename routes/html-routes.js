@@ -7,37 +7,23 @@ const saltRounds = 4;
 var zipcode = require('zipcode');
 var path = require('path');
 var chalk = require('chalk');
-// var Saltedpass = ' '
-
-
-// Routes
-
-
 
 //=================GET ROUTES========================================
-//main.handlebars handler (within views not layouts...should change name)
 
-//once the person looged out we close its session! 
+//once the person logs out we close their session! 
 router.get('/logout', function(req, res) {
 
     req.session.logged_in = false;
     req.session.destroy(function() {
-        // res.sendFile(path.join(__dirname, "/../views/main.handlebars"));
         res.redirect("/");
     });
 })
 
 
-
+//home.handlebars handler 
 router.get('/', (req, res) => {
 
-    // var data = {
-    //     hello: ' World'
-    // }
-
-    // res.render('main', data);
-    // console.log(path.join(__dirname, "../../views/main.handlebars"))
-    res.render(path.join(__dirname, "/../views/main.handlebars"));
+    res.render(path.join(__dirname, "/../views/home.handlebars"));
 
 });
 
@@ -57,6 +43,7 @@ router.get('/signup', (req, res) => {
     res.render('signup', data);
 
 });
+
 //login.handlebars handler
 router.get('/login', (req, res) => {
     var data = {
@@ -67,24 +54,22 @@ router.get('/login', (req, res) => {
 });
 
 //animalSearch.handlbars handler
-//Search page only accessible to users who have signed up
 router.get('/search/:username', (req, res) => {
-    console.log('I WSS SEARCHING')
+    console.log('I WAS SEARCHING')
     console.log(req.params.username);
 
 
-    // IF THE PERSON LOGGED IN THEN WE CAN ONLY ACCES DATA!
+    //Search page only accessible to users who have logged up
     if (req.session.logged_in && req.session.user_name == req.params.username) {
         db.User.findOne({
             where: {
                 username: req.params.username
             }
         }).then(function(data) {
-
+            //note: must use data.dataValues rather than simply "data"
             var params = data.dataValues
             console.log(params)
-                // res.render('animalSearch', { pets: data });
-                //call findAnimals from within /routes/animalSearchFunction.js
+            
             res.render('animalSearch', { data: params }); //nh: render requires you have a handle
         })
 
@@ -206,18 +191,15 @@ router.get('/foundAnimals/:username', (req, res) => {
 
 
             //call findAnimals from within /routes/animalSearchFunction.js
-            apiMain.findAminals(params, function(data) { //nh: function(data)=cb in animalSearchFunction.js
+            apiMain.findAminals(params, function(data) { 
+                //nh: function(data)=cb in animalSearchFunction.js
                 console.log('FUNN')
                 var userobj = {
                         username: params.username,
                         userid: params.id
                     }
-                    // console.log("userobj:" + userobj.username + "-" + userobj.userid)
-
                 res.render('petsOnSearch', { pets: data, user: userobj });
-                // console.log(data)
                 //{pets:data} pets is the handler passed to handlebars, data is the info to be displayed.
-                // res.render('petsOnSearch', { pets: data, user: userobj });
             })
 
         })
@@ -234,8 +216,8 @@ router.post("/signup", function(req, res) {
 
     console.log(req.body)
     if (req.body.password != req.body.confirm) {
-        console
-        res.render('signup', { PassworBad: 'Your password is not matching!' })
+        
+        res.render('signup', { BadPassword: 'Your password does not match!' })
     } else {
         bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
             // console.log(hash)
@@ -290,9 +272,6 @@ router.post("/login", function(req, res) {
         }
     }).then(function(data) {
         if (data) {
-            // console.log("data.dataValues.password:");
-            // console.log(data.dataValues.password);
-            // console.log("--------");
             // console.log("data.dataValues:")
             console.log('DATA FROM LOGGING IN')
             console.log(data.dataValues)
@@ -354,12 +333,6 @@ router.post('/search/:username', (req, res) => {
 
 });
 
-
-
-
-//================ If no matching route is found default to home====================
-// router.use(function(req, res) {
-
 //---gilbert's 
 router.post("/favAnimals", function(req, res) {
     console.log('Inserting favorited pet one at a time in the background....');
@@ -399,16 +372,12 @@ router.post("/favAnimals", function(req, res) {
 
 });
 
-//     res.redirect("/");
-// });
-// ===================tried code below as well but doesn't recognize the path/file================
+//================ If no matching route is found default to home====================
 router.use(function(req, res) {
     //     var data = {
     //     hello: ' World'
     // }
-    res.render(path.join(__dirname, "/../views/main.handlebars"));
+    res.render(path.join(__dirname, "/../views/home.handlebars"));
 });
 
-//================ If no matching route is found default to home====================
-// router.use(function(req, res) {
 module.exports = router;

@@ -10,7 +10,7 @@ $(document).ready(function() {
     $('.logo').on('mouseover', () => {
             $('.logo').animateCss('bounce');
 
-        })
+    })
         // animate CSS
     $.fn.extend({
         animateCss: function(animationName) {
