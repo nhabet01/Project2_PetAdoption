@@ -80,7 +80,14 @@
                     <p class="phone">Phone: {{this.phone}}</p>
                     <p>Email: <a href="mailto:{{this.email}}" target ="_top">{{this.email}}</a> </p> 
                     <p>Address: {{this.address}}</p>
-
+                    <p class="fix">{{this.description}}</p>
+                    <div class="modal myModal">
+                    <!-- Modal content -->
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <p class="description"></p>
+                        </div>
+                    </div>
                     <div class="favs">
                         <form action="/favAnimals/" method="POST">
                           <input type="hidden" name="favorite" value="{{this.petid}}${{this.petuserid}}${{this.petusername}}">
@@ -94,4 +101,3 @@
         </div>
     </div>
 </div>
-

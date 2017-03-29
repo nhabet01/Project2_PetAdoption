@@ -29,7 +29,7 @@ const API = {
 
                     let pet = {
                         petPicture: breeds[i].media.photos['1'].x,
-                        descriptsion: breeds[i].description,
+                        description: breeds[i].description,
                         phone: breeds[i].contact.phone,
                         email: breeds[i].contact.email,
                         address: breeds[i].contact.address1,
