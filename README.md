@@ -94,13 +94,13 @@ Create a migration strategy for sharing data across teammembers.
 <li>Password Match validation</li>
 
 
+
 # Day 9 Group Project Sequlizer CRUD, MVC
 <li>Contact page </li>      
 <li>Clean up of code</li>
 <li></li>      
 <li></li>
 <li></li>
-
 <li>Front End  - 80% Done -DZ </li>      
 <li>Validation - moved to back End</li>
 <li>Need Poop up for images with data</li>
