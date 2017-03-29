@@ -1,5 +1,3 @@
-//Sequelize User Model
-
 var bcrypt = require("bcrypt");
 var validator = require('validator');
 
@@ -16,8 +14,7 @@ module.exports = function(sequelize, DataTypes) {
 
                 type: DataTypes.STRING,
                 allowNull: false,
-                unique:{
-                    msg: "Username already exists"}
+                unique:true,
             },
             password: {
                 type: DataTypes.STRING,
@@ -30,22 +27,23 @@ module.exports = function(sequelize, DataTypes) {
                 unique:true,
                 validate: {
                     isEmail: true, //checks for email format (foo@bar.com) via validators.js & sequelize
+
                 }
+
             },
 
             zip: {
                 type: DataTypes.INTEGER,
                 allowNull: true,
                 validate: {
-                    len: [5, 5], 
-                    //using the combination of integer and length of 5 regex validation in routes as well
+                    len: [5, 5], //nh: using the combination of integer and length of 5 until a better validator is implemented
                 }
             },
             animal: {
                 type: DataTypes.STRING,
                 allowNull: true,
-                is: ["^[a-z]+$", 'i'],
-                //only allows letters (secondary validation in case user can by-pass the options given)
+                is: ["^[a-z]+$", 'i'], //only allows letters (secondary validation incase user can by-pass the options given)
+
             },
             age: {
                 type: DataTypes.STRING,
@@ -57,24 +55,12 @@ module.exports = function(sequelize, DataTypes) {
                 allowNull: true,
             }
 
-        },
-        // {
-        //     validate: {
-        //         retrunErr : function(){
-        //             // if(!isEmail(this.email)){
-        //             // throw new Error("Email must be in foo@bar.com format")
-        //             //  }
-        //             if(!unique(this.email)){
-        //              throw new Error("User with this email is already signed up")
-        //             }
-        //         }
-        //     }     
-        // }, 
+        }, //ADD "," when using classMethods below
         {
             classMethods: {
                 associate: function(models) {
                     User.hasMany(models.Favorites, {
-                        onDelete: "cascade" 
+                        onDelete: "cascade" //not sure this should be allowed as may delete pets from other users?
                     });
                 }
             }
@@ -84,43 +70,3 @@ module.exports = function(sequelize, DataTypes) {
 
     return User;
 };
-
-
-// var Pub = Sequelize.define('pub', {
-//   name: { type: Sequelize.STRING },
-//   address: { type: Sequelize.STRING },
-//   latitude: {
-//     type: Sequelize.INTEGER,
-//     allowNull: true,
-//     defaultValue: null,
-//     validate: { min: -90, max: 90 }
-//   },
-//   longitude: {
-//     type: Sequelize.INTEGER,
-//     allowNull: true,
-//     defaultValue: null,
-//     validate: { min: -180, max: 180 }
-//   },
-// }, {
-//   validate: {
-//     bothCoordsOrNone: function() {
-//       if ((this.latitude === null) !== (this.longitude === null)) {
-//         throw new Error('Require either both latitude and longitude or neither')
-//       }
-//     }
-//   }
-// })
-
-// {validate: {
-//     retrunErr : function(value){
-//         if(!isEmail(value)){
-//             throw new Error("Must input a proper email")
-//         }
-//         if(!unique(value)){
-//             throw new Error("User with this email is already signed up")
-//         }
-//     }
-//   }
-// }
-
-//         

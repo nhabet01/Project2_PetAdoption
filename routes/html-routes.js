@@ -59,7 +59,7 @@ router.get('/search/:username', (req, res) => {
     console.log(req.params.username);
 
 
-    //Search page only accessible to users who have logged in
+    //Search page only accessible to users who have logged up
     if (req.session.logged_in && req.session.user_name == req.params.username) {
         db.User.findOne({
             where: {
@@ -69,95 +69,17 @@ router.get('/search/:username', (req, res) => {
             //note: must use data.dataValues rather than simply "data"
             var params = data.dataValues
             console.log(params)
-            //nb: render requires you have a handle
-            res.render('animalSearch', { data: params }); 
+            
+            res.render('animalSearch', { data: params }); //nh: render requires you have a handle
         })
 
     } else {
-        //future work: create 404 page
+
         res.send('unauthorized!')
     }
 });
 
-//"favorites" handler (returns search page)
-router.get('/favorites/:username', (req, res) => {
 
-    if (req.session.logged_in && req.session.user_name == req.params.username) {
-       
-        db.User.findOne({
-            where: {
-                username: req.params.username
-            }
-        }).then(function(data) {
-
-            var params = data.dataValues
-            var userobj = {
-                username: params.username,
-                userid: params.id
-            }
-            var favs;
-
-            db.Favorites.findAll({
-                where: {
-                    UserId: params.id
-                }
-            }).then(function(FavsData) {
-
-                if (FavsData.length > 0) {
-
-                    let IDs = FavsData.map(favobject => `${favobject.animalID}`);
-                    apiMain.findfav(IDs, function(FavsDataReturn) {
-                        //with CB we have result as an array and we can render it on the page. 
-                        favs = FavsDataReturn
-                        res.render('petsOnSearch', { favs: favs, user: userobj });
-                    })
-
-                } else {
-
-                    res.render('petsOnSearch', { Nofavs: 'No Favorites yet!', user: userobj });
-                }
-            })
-        })
-    } else {
-        res.send('unauthorized')
-    }
-
-})
-
-
-//petsOnSearch.handlebars handler
-router.get('/foundAnimals/:username', (req, res) => {
-
-    // page only accessible to users who have logged in
-    if (req.session.logged_in && req.session.user_name == req.params.username) {
-        db.User.findOne({
-            where: {
-                username: req.params.username
-            }
-        }).then(function(data) {
-
-            var params = data.dataValues
-
-            //call findAnimals from within /routes/animalSearchFunction.js
-            apiMain.findAminals(params, function(data) { 
-                //nh: function(data)=cb in animalSearchFunction.js
-                console.log('FUNN')
-                var userobj = {
-                        username: params.username,
-                        userid: params.id
-                    }
-                res.render('petsOnSearch', { pets: data, user: userobj });
-                //{pets:data} pets is the handler passed to handlebars, data is the info to be displayed.
-            })
-
-        })
-    } else {
-        res.send('unauthorized')
-    }
-});
-
-// ====================DELETE================================
-//Allows removal of individual favorites:
 router.delete('/favorites/:userId/:userName/:petid', (req, res) => {
 
     console.log(req.params)
@@ -177,18 +99,128 @@ router.delete('/favorites/:userId/:userName/:petid', (req, res) => {
 
 
 
+router.get('/favorites/:username', (req, res) => {
+
+    if (req.session.logged_in && req.session.user_name == req.params.username) {
+        // if we create boolean here???//
+        db.User.findOne({
+            where: {
+                username: req.params.username
+            }
+        }).then(function(data) {
+
+            var params = data.dataValues
+            var userobj = {
+                username: params.username,
+                userid: params.id
+            }
+            var favs;
+            /////////////////////////////////////////////////////////FAVORITES
+            db.Favorites.findAll({
+                where: {
+                    UserId: params.id
+                }
+            }).then(function(FavsData) {
+
+
+                if (FavsData.length > 0) {
+                    //  console.log(chalk.red('FAVS'));
+                    //  console.log(FavsData);
+                    //   console.log(chalk.red('DONE'));
+                    //creating array of favorite ID animals and send it to the API funciton
+                    let IDs = FavsData.map(favobject => `${favobject.animalID}`);
+                    apiMain.findfav(IDs, function(FavsDataReturn) {
+                        //with CB we have result as an array and we can render it on the page! 
+                        favs = FavsDataReturn
+                        res.render('petsOnSearch', { favs: favs, user: userobj });
+                    })
+
+                } else {
+
+                    res.render('petsOnSearch', { Nofavs: 'No Favorites yet!', user: userobj });
+                }
+
+            })
+
+        })
+    } else {
+        //we can create some cool unauthorized page! 
+        res.send('unauthorized')
+    }
+
+})
+
+
+
+
+//petsOnSearch.handlebars handler
+router.get('/foundAnimals/:username', (req, res) => {
+
+    // if person LOGGED IN THEN WE CAN ONLY ACCES THE DATA!!!!
+    if (req.session.logged_in && req.session.user_name == req.params.username) {
+        // if we create boolean here???//
+        db.User.findOne({
+            where: {
+                username: req.params.username
+            }
+        }).then(function(data) {
+
+            var params = data.dataValues
+            var favs;
+            /////////////////////////////////////////////////////////FAVORITES
+            db.Favorites.findAll({
+                where: {
+                    UserId: params.id
+                }
+            }).then(function(FavsData) {
+                if (FavsData.length >= 0) {
+                    //  console.log(chalk.red('FAVS'));
+                    //  console.log(FavsData);
+                    //   console.log(chalk.red('DONE'));
+                    let IDs = FavsData.map(favobject => `${favobject.animalID}`);
+                    apiMain.findfav(IDs, function(FavsDataReturn) {
+
+                        favs = FavsDataReturn
+                    })
+                } else {
+
+                    console.log('no favorites Yet')
+                }
+
+            })
+
+
+            //call findAnimals from within /routes/animalSearchFunction.js
+            apiMain.findAminals(params, function(data) { 
+                //nh: function(data)=cb in animalSearchFunction.js
+                console.log('FUNN')
+                var userobj = {
+                        username: params.username,
+                        userid: params.id
+                    }
+                res.render('petsOnSearch', { pets: data, user: userobj });
+                //{pets:data} pets is the handler passed to handlebars, data is the info to be displayed.
+            })
+
+        })
+    } else {
+        //we can create some cool unauthorized page! 
+        res.send('unauthorized')
+    }
+});
+
+
 // ====================POST ROUTES================================
-//Post route for signing up new users
 router.post("/signup", function(req, res) {
     console.log('SIGNUP')
 
-    console.log(`username: ${req.body.username}  email: ${req.body.email}`);
+    console.log(req.body)
     if (req.body.password != req.body.confirm) {
         
         res.render('signup', { BadPassword: 'Your password does not match!' })
-    }
-    else {
+    } else {
         bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+            // console.log(hash)
 
             db.User.create({
                     name: req.body.name,
@@ -197,18 +229,13 @@ router.post("/signup", function(req, res) {
                     email: req.body.email
 
 
-            }).then(function(data, err) {
+                }).then(function(data, err) {
                     // console.log(data.dataValues)
-                    // if (err){
-                    // console.log("email or username check in html-routes:")
-                    // console.log(err)
-                    // var err = {error :err}
-                    // res.render('signup',{BadPassword:err})
-                    // }   
+                    console.log(err)
+                    console.log('good')
 
-
-                    // when a person signs up we authorize a session
-                    //and have acces to email and username NOT password--keep it hashed
+                    // when person sigins up we authorize it
+                    //and have acces to email and username NOT password keep it hashED
                     req.session.logged_in = true;
                     req.session.user_name = req.body.username;
                     req.session.user_email = req.body.email;
@@ -216,64 +243,71 @@ router.post("/signup", function(req, res) {
 
                     // we give a session token  and user has access to it during the visit until they log out 
                     res.redirect(`/search/${req.session.user_name}`)
-                        
-            }).catch(function(error) {
-                if (error) {
-                    console.log(error.message)
-                    var data = { BadError: error.message }
-                    res.render('signup', data)
-                }
-            });
+                        // res.redirect('/', data.dataValues.username)
+                })
+                .catch(function(error) {
+                    if (error) {
+                        console.log(error.message)
+                        var data = { baderror: error.message }
+                        res.render('signup', data)
+                    }
+
+                });
         });
     }
+
+
 });
 
 
-//Post route for loggin in existing users
+
 router.post("/login", function(req, res) {
     console.log('LOGIN')
 
     console.log(req.body.username);
-    
+    // console.log(req.body.password);
     db.User.findOne({
         where: {
             username: req.body.username
         }
     }).then(function(data) {
         if (data) {
-            console.log('DATA FROM LOGIN')
+            // console.log("data.dataValues:")
+            console.log('DATA FROM LOGGING IN')
             console.log(data.dataValues)
             if (bcrypt.compareSync(req.body.password, data.dataValues.password)) {
                 //if statement takes care of async version of bcrypt.compare
-                
-                // we turn session on 
+                // we turn session on  ! 
                 //we have acces to username  ID and email! 
+
                 req.session.logged_in = true
-                //for each session we will have uniqe key which is userID and is a foreign key 
-                // we can use this id to link to favorite animals
-                req.session.user_id = data.dataValues.id; 
+                    //for each session we will have uniqe key which is and ID and is a foreign key! 
+                req.session.user_id = data.dataValues.id; // we can use this id to do the favorite animals! 
                 req.session.user_name = data.dataValues.username;
                 req.session.user_email = req.body.email;
 
 
-                //and we pass our session to search 
+                //and we pass our session to search! 
                 res.redirect(`/search/${req.session.user_name}`)
 
             } else {
 
                 res.render('login', { wrongData: 'Wrong Password!' })
-                console.log('Wrong Password');
+                console.log('Password Wrong')
             }
         } else {
             res.render('login', { wrongData: 'User does not exists!' })
-            console.log('User Does Not exists');
+            console.log('User Do Not exists')
         }
+
+
     })
+
 });
 
-//Post route for "searching" the api; data sent to foundAnimals and call made there.
+
 router.post('/search/:username', (req, res) => {
-    //Check Point
+    //CHECK POINT IF USER LOGGED IN 
     if (req.session.logged_in && req.session.user_name == req.params.username) {
         console.log(req.params.username)
         console.log('BODY')
@@ -285,21 +319,26 @@ router.post('/search/:username', (req, res) => {
             return
         }
 
+        // animal | age  | gender
         db.User.update({ zip: req.body.zip, animal: req.body.animalType, age: req.body.animalAge, gender: req.body.animalSex }, {
             where: { username: req.params.username }
         }).then(function(result) {
+            // now you see me...
+            console.log(result)
             res.redirect(`/foundAnimals/${req.params.username}`)
         })
+
     }
+    //we have to do else here { boo unauthorized! }
+
 });
 
-//Post route for adding favorites 
+//---gilbert's 
 router.post("/favAnimals", function(req, res) {
-
+    console.log('Inserting favorited pet one at a time in the background....');
+    //console.log(`petid: ${petId} username: ${username}  userid: ${userid}`);
+    // console.log(req.body);
     var str = req.body.favorite;
-    console.log('req.body.favorite:');
-    console.log(req.body.favorite);
-    console.log('=============');
     var str2 = str.slice(str.indexOf("$") + 1);
     var petid = str.slice(0, str.indexOf("$"));
     var usrid = str2.slice(0, str2.indexOf("$"));
@@ -324,7 +363,7 @@ router.post("/favAnimals", function(req, res) {
                 UserId: userid
             }).then(function(data) {
                 // console.log(data);
-                console.log(" this favorite has been added");
+                console.log(" this favorite is added...");
                 res.redirect(`/foundAnimals/${usrname}`)
             });
         }
@@ -335,7 +374,9 @@ router.post("/favAnimals", function(req, res) {
 
 //================ If no matching route is found default to home====================
 router.use(function(req, res) {
- 
+    //     var data = {
+    //     hello: ' World'
+    // }
     res.render(path.join(__dirname, "/../views/home.handlebars"));
 });
 
