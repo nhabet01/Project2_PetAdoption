@@ -1,6 +1,6 @@
 
  <!-- Navigation -->
-
+<script src ="../static/js/petonsearch.js" ></script><!-- why the static path? -->
      <div class="shadow">
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 
@@ -78,10 +78,17 @@
             {{#each pets}}
 
             <div class="col-lg-3 col-md-4 col-xs-8 thumb crop">
-                <img class="petPicture thumbnail" width="300px" height="300px" src="{{this.petPicture}}" alt="">
+                <button class="element myBtn"><img class="petPicture thumbnail" width="300px" height="300px" src="{{this.petPicture}}" alt=""></button>
                 <p class="phone">Phone: {{this.phone}}</p>
                 <p>Email: <a href="mailto:{{this.email}}" target ="_top">{{this.email}}</a> </p> 
                 <p>Address: {{this.address}}</p>
+                <div class="modal myModal">
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <p class="description">{{this.description}}</p>
+                    </div>
+                </div>
 
                 <div class="favs">
                  <!-- need to 1.) find out what the pet id is called and place somewhere in that form (maybe where it is maybe somewhere else) 2.) create a post route for foundAnimals/...so that an entry is recorded in the favorites table. 3.) need to add a boolean to the table? maybe not...but must associate the pet with user and many users may like the same pet so have to change the associations-->
@@ -96,6 +103,9 @@
             </div>
             {{/each}}
         </div>
+
     </div>
+    <!-- The Modal -->
+
 
    <!--create fxn in api call that accepts animal id and returns data,-->

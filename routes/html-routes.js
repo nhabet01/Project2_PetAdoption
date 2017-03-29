@@ -202,7 +202,9 @@ router.get('/foundAnimals/:username', (req, res) => {
 
 
             //call findAnimals from within /routes/animalSearchFunction.js
-            apiMain.findAminals(params, function(data) { //nh: function(data)=cb in animalSearchFunction.js
+            apiMain.findAminals(params, function(data) {
+                
+             //nh: function(data)=cb in animalSearchFunction.js
                 console.log('FUNN')
                 var userobj = {
                         username: params.username,
