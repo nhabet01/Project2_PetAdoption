@@ -5,9 +5,9 @@ $(document).ready(function() {
 	$('.myBtn').on('click' , function(e){
 
  	//console.log($(this).parent().find('.description')["0"].innerHTML)
- 	var text = $(this).parent().find('.description')["0"].innerHTML
- 	console.log(text)
- 	$(".myModal").find('.description').html(text)
+ 	// var text = $(this).parent().find('.description')["0"].innerHTML
+ 	console.log($(this).parent().find('.fix')["0"].innerHTML);
+ 	$(".myModal").find('.description').text($(this).parent().find('.fix')["0"].innerHTML);
  	//our text!
 
  		$(".myModal").css("display" , "block")
@@ -18,7 +18,7 @@ $(".close").on('click', function(e){
 
 // this.parent.find()
 	
-	console.log()
+	// console.log()
 	// Get the modal
 // var modal = document.getElementsByClassName('myModal');
 

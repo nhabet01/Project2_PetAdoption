@@ -241,3 +241,8 @@ img {
 .fa-home {
     color: red;
 }
+
+.fix {
+    visibility: hidden;
+    font-size: 25%;
+}
