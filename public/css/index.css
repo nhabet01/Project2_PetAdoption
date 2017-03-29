@@ -68,6 +68,7 @@ input::-webkit-input-placeholder {
     border: 1px solid #ccc;
     margin-top: 28px;
     padding: 6px 12px;
+                                                                          /*diff from Jason*/
     color: #666;
     text-shadow: 0 1px #fff;
     cursor: pointer;
@@ -118,9 +119,9 @@ span.input-group-addon i {
     background-color: #ff6633;
     color: #ffffff;
 }
-
+                                                            /*diff from Jason*/
 .shadow {
-/*box-shadow: 5px 5px 5px #888888;*/
+/*box-shadow: 5px 5px 5px #888888;  */ 
 }
 
 .logo {
@@ -186,6 +187,8 @@ footer {
         /*max-height: 200px;*/
         overflow: none;
     }
+}
+                                       /*closing media*/
 
 img {
     object-fit: cover;

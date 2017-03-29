@@ -98,8 +98,8 @@ Create a migration strategy for sharing data across teammembers.
 
 # Day 9 Group Project Sequlizer CRUD, MVC
 <li>Contact page </li>      
-<li></li>
+<li>Clean up of code</li>
 <li></li>      
-<li>d</li>
+<li></li>
 <li></li>
 

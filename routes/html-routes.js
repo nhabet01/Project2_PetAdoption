@@ -139,14 +139,8 @@ router.get('/foundAnimals/:username', (req, res) => {
             var params = data.dataValues
 
             //call findAnimals from within /routes/animalSearchFunction.js
-<<<<<<< HEAD
             apiMain.findAminals(params, function(data) { 
                 //nh: function(data)=cb in animalSearchFunction.js
-=======
-            apiMain.findAminals(params, function(data) {
-                
-             //nh: function(data)=cb in animalSearchFunction.js
->>>>>>> jasonBranch
                 console.log('FUNN')
                 var userobj = {
                         username: params.username,
@@ -220,7 +214,7 @@ router.post("/signup", function(req, res) {
                     req.session.user_email = req.body.email;
 
 
-                    // we give a session token  and user has access to it during the visit until they log out! 
+                    // we give a session token  and user has access to it during the visit until they log out 
                     res.redirect(`/search/${req.session.user_name}`)
                         
             }).catch(function(error) {
