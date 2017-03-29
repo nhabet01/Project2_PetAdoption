@@ -41,6 +41,14 @@ router.get('/', (req, res) => {
 
 });
 
+//contact.handlebars handler
+router.get('/contact', (req, res) => {
+    var data = {
+        hello: ' World'
+    }
+    res.render('contact',data);
+});
+
 //signup.handlebars handler
 router.get('/signup', (req, res) => {
     var data = {
@@ -194,11 +202,7 @@ router.get('/foundAnimals/:username', (req, res) => {
                     console.log('no favorites Yet')
                 }
 
-
-
-
             })
-
 
 
             //call findAnimals from within /routes/animalSearchFunction.js

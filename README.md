@@ -86,3 +86,9 @@ Create a migration strategy for sharing data across teammembers.
 <li>Created Favorites rout using searched pets - DZ</li>
 <li>Will work on delete from favorites function tomorrow - DZ</li>
 <li>Need get on Frond End and still need validation for password match on signup pahe - DZ</li>
+
+# Day 8 Group Project Sequlizer CRUD, MVC
+<li>Contact page </li>      
+<li>Modals for pet info</li>
+<li>Delete from Favorites</li>
+<li>Password Match validation</li>
