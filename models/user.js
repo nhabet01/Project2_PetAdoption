@@ -17,22 +17,28 @@ module.exports = function(sequelize, DataTypes) {
                 type: DataTypes.STRING,
                 allowNull: false,
                 unique:{
-                    msg: "Username already exists"}
+                    msg: "Username already exists"
+                },
             },
             password: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-
             email: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                unique:true,
+                unique: {
+                    msg: 'Email in the System!'
+                },
+                //checks for email format (foo@bar.com) via validators.js & sequelize
                 validate: {
-                    isEmail: true, //checks for email format (foo@bar.com) via validators.js & sequelize
-                }
-            },
+                    isEmail: {
+                        msg: 'The email has wrong format!'
+                    }
 
+                }
+
+            },
             zip: {
                 type: DataTypes.INTEGER,
                 allowNull: true,
@@ -58,18 +64,6 @@ module.exports = function(sequelize, DataTypes) {
             }
 
         },
-        // {
-        //     validate: {
-        //         retrunErr : function(){
-        //             // if(!isEmail(this.email)){
-        //             // throw new Error("Email must be in foo@bar.com format")
-        //             //  }
-        //             if(!unique(this.email)){
-        //              throw new Error("User with this email is already signed up")
-        //             }
-        //         }
-        //     }     
-        // }, 
         {
             classMethods: {
                 associate: function(models) {
@@ -79,48 +73,8 @@ module.exports = function(sequelize, DataTypes) {
                 }
             }
         }
-
     );
 
     return User;
 };
 
-
-// var Pub = Sequelize.define('pub', {
-//   name: { type: Sequelize.STRING },
-//   address: { type: Sequelize.STRING },
-//   latitude: {
-//     type: Sequelize.INTEGER,
-//     allowNull: true,
-//     defaultValue: null,
-//     validate: { min: -90, max: 90 }
-//   },
-//   longitude: {
-//     type: Sequelize.INTEGER,
-//     allowNull: true,
-//     defaultValue: null,
-//     validate: { min: -180, max: 180 }
-//   },
-// }, {
-//   validate: {
-//     bothCoordsOrNone: function() {
-//       if ((this.latitude === null) !== (this.longitude === null)) {
-//         throw new Error('Require either both latitude and longitude or neither')
-//       }
-//     }
-//   }
-// })
-
-// {validate: {
-//     retrunErr : function(value){
-//         if(!isEmail(value)){
-//             throw new Error("Must input a proper email")
-//         }
-//         if(!unique(value)){
-//             throw new Error("User with this email is already signed up")
-//         }
-//     }
-//   }
-// }
-
-//         

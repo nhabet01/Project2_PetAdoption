@@ -18,7 +18,11 @@ const API = {
         console.log(animalType, animalAge, animalSex, zip, params.username, params.id)
             //Difference between age and size? why is size hardcoded
 
-        petfinder.findPet(zip, { animal: animalType, sex: animalSex, age: animalAge }, function(err, breeds) {
+        petfinder.findPet(zip, {
+            animal: animalType,
+            sex: animalSex,
+            age: animalAge
+        }, function(err, breeds) {
 
             let data = []
             for (var i = 0; i < breeds.length; i++) {
@@ -47,17 +51,32 @@ const API = {
 
 
     },
-
-    //reciev an array of ID's
+ 
+   //reciev an array of ID's
     findfav(arrayOfFavs, cb) {
 
         var ObjectMaintoCB = []
 
+        function reduceArray(array) {
+            if (array.length > 7) {
+                array.pop()
+                console.log(array)
+                reduceArray(array)
+
+            } else {
+                return reduceArray
+            }
+
+        }
+        reduceArray(arrayOfFavs)
         arrayOfFavs.forEach(function(element) {
             //find each pet by id and send it to array with return! 
+
             petfinder.getPet(element, {}, function(err, breeds) {
+                if (!breeds) {
 
-
+                }
+                console.log('Bugssss')
                 let pet = {
                     petPicture: breeds.media.photos['1'].x,
                     descriptsion: breeds.description,
@@ -66,9 +85,9 @@ const API = {
                     address: breeds.contact.address1,
                     petid: breeds.id, //good,passed to animalSearch.handlebars
                 };
-
-                // console.log(pet)
-                //return it
+                console.log(pet)
+                    // console.log(pet)
+                    //return it
                 ObjectMaintoCB.push(pet)
                 if (ObjectMaintoCB.length == arrayOfFavs.length) {
 
@@ -92,4 +111,3 @@ module.exports = API;
 
 
 
-// for favotrite animal we will call API.findfav(petId)

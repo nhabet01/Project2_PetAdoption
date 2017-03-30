@@ -220,9 +220,17 @@ router.post("/signup", function(req, res) {
                         
             }).catch(function(error) {
                 if (error) {
+                    console.log(error)
                     console.log(error.message)
-                    var data = { BadError: error.message }
+
+
+                    if (error.message.includes('Validation error:')) {
+                        error.message = error.message.slice(17)
+                    }
+                    var data = { baderror: error.message }
                     res.render('signup', data)
+                    
+                                             
                 }
             });
         });
