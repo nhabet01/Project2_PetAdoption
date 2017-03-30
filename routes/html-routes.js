@@ -41,6 +41,14 @@ router.get('/', (req, res) => {
 
 });
 
+//contact.handlebars handler
+router.get('/contact', (req, res) => {
+    var data = {
+        hello: ' World'
+    }
+    res.render('contact', data);
+});
+
 //signup.handlebars handler
 router.get('/signup', (req, res) => {
     var data = {
@@ -174,6 +182,33 @@ router.get('/foundAnimals/:username', (req, res) => {
 
             var params = data.dataValues
                 //call findAnimals from within /routes/animalSearchFunction.js
+
+            var favs;
+            /////////////////////////////////////////////////////////FAVORITES
+            db.Favorites.findAll({
+                where: {
+                    UserId: params.id
+                }
+            }).then(function(FavsData) {
+                if (FavsData.length >= 0) {
+                    //  console.log(chalk.red('FAVS'));
+                    //  console.log(FavsData);
+                    //   console.log(chalk.red('DONE'));
+                    let IDs = FavsData.map(favobject => `${favobject.animalID}`);
+                    apiMain.findfav(IDs, function(FavsDataReturn) {
+
+                        favs = FavsDataReturn
+                    })
+                } else {
+
+                    console.log('no favorites Yet')
+                }
+
+            })
+
+
+            //call findAnimals from within /routes/animalSearchFunction.js
+
             apiMain.findAminals(params, function(data) { //nh: function(data)=cb in animalSearchFunction.js
                 console.log('FUNN')
                 var userobj = {

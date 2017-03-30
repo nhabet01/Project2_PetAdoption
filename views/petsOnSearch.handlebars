@@ -26,7 +26,7 @@
                         <a href="/logout">Log Out</a>
                     </li>
                     <li>
-                        <a href="/">Contact</a>
+                        <a href="/contact">Contact</a>
                     </li>
                     <li>
                     <!-- need to pass in username to add to href=/search/username -->
@@ -34,7 +34,7 @@
                     </li>
                     
                      <li>
-                    <!-- need to pass in username to add to href=/search/username -->
+                    <!-- need to pass in username to add to href=/favorite/username -->
                         <a href="/favorites/{{user.username}}">Favs</a>
                     </li>
                    
@@ -54,7 +54,9 @@
 
 
 
-           {{!--<p>{{user.username}}'s favorites userid:{{user.userid}} </p> <!-- If user ID not needed to pass info along then will not include here -->--}}
+
+           <p class="usertag">{{user.username}}'s favorites </p> <!-- If user ID not needed to pass info along then will not include here -->
+
                                     {{#if Nofavs}}
                                         <h1 class="foundAnimsLogo">{{Nofavs}}</h1>
                     
