@@ -1,10 +1,10 @@
 
 <!-- Navigation -->
-<script src ="static/js/signup.js" ></script><!-- why the static path? -->
+{{!-- <script src ="static/js/signup.js" ></script> --}}
 <link rel="stylesheet" href="/static/css/signup.css">
 <div class="shadow">
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-	    <div class="container">
+        <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -35,17 +35,20 @@
         </div>
         <!-- /.container -->
     </nav>
-	
+    
     <form class="" method="POST" action="/signup" >
         <div class="login-wrap">
             <div class="login-html">
                 <input id="tab-2" type="radio" name="tab" class="sign-up" checked><label for="tab-2" class="tab">Sign Up</label>
                 <div class="login-form">
                     <div class="sign-up-htm text-center">
-						{{#if BadPassword}}
-						<h4 class="BadPass">{{BadPassword}}</h4>
-						{{/if}}
-        				<div class="group">
+                        {{#if BadPassword}}
+                        <h4 class="BadPass">{{BadPassword}}</h4>
+                        {{/if}}
+                        {{#if BadError}}
+                        <h4 class="BadPass">{{BadError}}</h4>
+                        {{/if}}
+                        <div class="group">
                             <label for="user" class="label">Name</label>
                             <input id="user" type="text" name="name"  class="input">
                         </div>

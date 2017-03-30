@@ -1,6 +1,7 @@
-
+ <!-- This page contains both the results and favorites display (our RESTful approach) -->
  <!-- Navigation -->
 <script src="../static/js/foundAnimals.js"></script>
+<script src="../static/js/petonsearch.js"></script>
 <link rel="stylesheet" href="../static/css/foundAndFav.css">
 <div class="shadow">
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -76,18 +77,19 @@
             {{#each pets}}
 
                 <div class="col-lg-3 col-md-4 col-xs-8 thumb crop">
-                    <button class="element myBtn"><img class="petPicture thumbnail" width="300px" height="300px" src="{{this.petPicture}}" alt="pet"></button>
-                    <p class="phone">Phone: {{this.phone}}</p>
-                    <p>Email: <a href="mailto:{{this.email}}" target ="_top">{{this.email}}</a> </p> 
-                    <p>Address: {{this.address}}</p>
-                    <p class="fix">{{this.description}}</p>
-                    <div class="modal myModal">
+                <img class="petPicture thumbnail myBtn" width="300px" height="300px" src="{{this.petPicture}}" alt="">
+                <p class="phone">Phone: {{this.phone}}</p>
+                <p>Email: <a href="mailto:{{this.email}}" target ="_top">{{this.email}}</a> </p> 
+                <p>Address: {{this.address}}</p>
+                <span class="fix">{{this.description}}</span>
+                <div class="modal myModal">
                     <!-- Modal content -->
-                        <div class="modal-content">
-                            <span class="close">&times;</span>
-                            <p class="description"></p>
-                        </div>
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <p class="description"></p>
+                    </div>
                 </div>
+
                     <div class="favs">
                         <form action="/favAnimals/" method="POST">
                           <input type="hidden" name="favorite" value="{{this.petid}}${{this.petuserid}}${{this.petusername}}">
@@ -100,4 +102,4 @@
             {{/each}}
         </div>
     </div>
-</div>
+{{!-- </div> --}}
