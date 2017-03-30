@@ -183,7 +183,7 @@ footer {
 
 .thumbnail{
     display: inline-block;
-    margin-right: 10px;
+    margin-right: 20px;
     max-width: 300px;
     border: 1px solid black;
     /*max-height: 200px;*/
