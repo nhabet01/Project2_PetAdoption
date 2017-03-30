@@ -5,7 +5,7 @@ var methodOverride = require('method-override');
 //bcrypt used for validaton
 var bcrypt = require('bcrypt');
 var path = require('path')
-//cookieParser and session used for session tokens
+    //cookieParser and session used for session tokens
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 
