@@ -53,6 +53,18 @@ const API = {
 
         var ObjectMaintoCB = []
 
+        function reduceArray(array) {
+            if (array.length > 7) {
+                array.pop()
+                console.log(array)
+                reduceArray(array)
+
+            } else {
+                return reduceArray
+            }
+
+        }
+        reduceArray(arrayOfFavs)
         arrayOfFavs.forEach(function(element) {
             //find each pet by id and send it to array with return! 
 
