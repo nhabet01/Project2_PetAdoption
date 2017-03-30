@@ -18,7 +18,11 @@ const API = {
         console.log(animalType, animalAge, animalSex, zip, params.username, params.id)
             //Difference between age and size? why is size hardcoded
 
-        petfinder.findPet(zip, { animal: animalType, sex: animalSex, age: animalAge }, function(err, breeds) {
+        petfinder.findPet(zip, {
+            animal: animalType,
+            sex: animalSex,
+            age: animalAge
+        }, function(err, breeds) {
 
             let data = []
             for (var i = 0; i < breeds.length; i++) {
@@ -29,7 +33,7 @@ const API = {
 
                     let pet = {
                         petPicture: breeds[i].media.photos['1'].x,
-                        descriptsion: breeds[i].description,
+                        description: breeds[i].description,
                         phone: breeds[i].contact.phone,
                         email: breeds[i].contact.email,
                         address: breeds[i].contact.address1,
@@ -47,8 +51,8 @@ const API = {
 
 
     },
-
-    //reciev an array of ID's
+ 
+   //reciev an array of ID's
     findfav(arrayOfFavs, cb) {
 
         var ObjectMaintoCB = []
@@ -107,4 +111,3 @@ module.exports = API;
 
 
 
-// for favotrite animal we will call API.findfav(petId)

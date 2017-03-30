@@ -1,8 +1,9 @@
-
+ <!-- This page contains both the results and favorites display (our RESTful approach) -->
  <!-- Navigation -->
- <script src="../static/js/foundAnimals.js"></script>
- <link rel="stylesheet" href="../static/css/foundAndFav.css">
-     <div class="shadow">
+<script src="../static/js/foundAnimals.js"></script>
+<script src="../static/js/petonsearch.js"></script>
+<link rel="stylesheet" href="../static/css/foundAndFav.css">
+<div class="shadow">
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 
      
@@ -37,7 +38,6 @@
                     <!-- need to pass in username to add to href=/favorite/username -->
                         <a href="/favorites/{{user.username}}">Favs</a>
                     </li>
-                   
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -48,62 +48,59 @@
     <div class="container-fluid text-center">
         <div class="jumbotron-fluid">
             {{!--<h1>Pets</h1>--}}
-      <div class="col-md-12">
-                <img class=" logo img-responsive img-rounded" src="../static/images/paw.png" alt="Adopt">
+            <div class="col-md-12">
+            <img class=" logo img-responsive img-rounded" src="../static/images/paw.png" alt="Adopt">
             </div>
 
-
-
-
-           <p class="usertag">{{user.username}}'s favorites </p> <!-- If user ID not needed to pass info along then will not include here -->
-
-                                    {{#if Nofavs}}
-                                        <h1 class="foundAnimsLogo">{{Nofavs}}</h1>
-                    
-                    
-                                       {{/if}}
-           {{#if favs }}
-                        <h3 class="foundAnimsLogo">   Your Favorites </h3>
+            {{#if Nofavs}}
+            <h1 class="foundAnimsLogo">{{Nofavs}}</h1>
+            {{/if}}
+            {{#if favs }}
+                <h3 class="foundAnimsLogo"> {{user.username}}'s Favorites </h3>
                 {{#each favs}}
-                             <div class=" favorites col-lg-3 col-md-4 col-xs-8 thumb crop">
-                <img class="petPicture thumbnail" width="300px" height="300px" src="{{this.petPicture}}" alt="">
-                <p class="phone">Phone: {{this.phone}}</p>
-                <p>Email: <a href="mailto:{{this.email}}" target ="_top">{{this.email}}</a> </p> 
-                <p>Address: {{this.address}}</p>
-                <form method="POST" action="/favorites/{{../user.userid}}/{{../user.username}}/{{this.petid}}?_method=DELETE">
-  <button type="submit" class="btn btn-danger">Remove</button>
-</form>
-
-            </div>
+                    <div class=" favorites col-lg-3 col-md-4 col-xs-8 thumb crop">
+                        <img class="petPicture thumbnail" width="300px" height="300px" src="{{this.petPicture}}" alt="">
+                        <p class="phone">Phone: {{this.phone}}</p>
+                        <p>Email: <a href="mailto:{{this.email}}" target ="_top">{{this.email}}</a> </p> 
+                        <p>Address: {{this.address}}</p>
+                        <form method="POST" action="/favorites/{{../user.userid}}/{{../user.username}}/{{this.petid}}?_method=DELETE">
+                        <button type="submit" class="btn btn-danger">Remove</button>
+                        </form>
+                    </div>
                 {{/each}}
-           {{/if}}
-
-
-
+            {{/if}}
 
            {{#if pets}} 
-                    <h3 class="foundAnimsLogo"> We Found Animals in your area!  </h3> 
+                    <h3 class="foundAnimsLogo">We Found Animals in your area!</h3> 
                     {{/if}}
+
             {{#each pets}}
 
-            <div class="col-lg-3 col-md-4 col-xs-8 thumb crop">
-                <img class="petPicture thumbnail" width="300px" height="300px" src="{{this.petPicture}}" alt="">
+                <div class="col-lg-3 col-md-4 col-xs-8 thumb crop">
+                <img class="petPicture thumbnail myBtn" width="300px" height="300px" src="{{this.petPicture}}" alt="">
                 <p class="phone">Phone: {{this.phone}}</p>
                 <p>Email: <a href="mailto:{{this.email}}" target ="_top">{{this.email}}</a> </p> 
                 <p>Address: {{this.address}}</p>
-                <div class="favs">
-                 <!-- need to 1.) find out what the pet id is called and place somewhere in that form (maybe where it is maybe somewhere else) 2.) create a post route for foundAnimals/...so that an entry is recorded in the favorites table. 3.) need to add a boolean to the table? maybe not...but must associate the pet with user and many users may like the same pet so have to change the associations-->
-                    <form action="/favAnimals/" method="POST">
-                      <input type="hidden" name="favorite" value="{{this.petid}}${{this.petuserid}}${{this.petusername}}">
-                      <button class="btn btn-success" type="submit">Favorite!</button>
-                      <br>
-                      <br>
-                      
-                    </form>
+
+                <span class="fix">{{this.description}}</span>
+                <div class="modal myModal">
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <p class="description"></p>
+                    </div>
                 </div>
-            </div>
+
+                    <div class="favs">
+                        <form action="/favAnimals/" method="POST">
+                          <input type="hidden" name="favorite" value="{{this.petid}}${{this.petuserid}}${{this.petusername}}">
+                          <button class="btn btn-success" type="submit">Favorite!</button>
+                          <br>
+                          <br>
+                        </form>
+                    </div>
+                </div>
             {{/each}}
         </div>
     </div>
-
-   <!--create fxn in api call that accepts animal id and returns data,-->
+{{!-- </div> --}}
