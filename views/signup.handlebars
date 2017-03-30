@@ -114,9 +114,12 @@
         <input id="tab-2" type="radio" name="tab" class="sign-up" checked><label for="tab-2" class="tab">Sign Up</label>
         <div class="login-form">
             <div class="sign-up-htm text-center">
-						{{#if PassworBad}}
-						<h4 class="BadPass">{{PassworBad}}</h4>
+						{{#if baderror}}
+						<h4 class="BadPass">{{baderror}}</h4>
 						{{/if}}
+                        {{#if data}}
+                        <h4 class="BadPass">{{baderror}}</h4> 
+                        {{/if}}
 				          <div class="group">
                     <label for="user" class="label">Name</label>
                     <input id="user" type="text" name="name"  class="input">

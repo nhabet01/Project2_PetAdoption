@@ -14,7 +14,9 @@ module.exports = function(sequelize, DataTypes) {
 
                 type: DataTypes.STRING,
                 allowNull: false,
-                unique:true,
+                unique: {
+                    msg: 'User Exists!'
+                },
             },
             password: {
                 type: DataTypes.STRING,
@@ -24,9 +26,13 @@ module.exports = function(sequelize, DataTypes) {
             email: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                unique:true,
+                unique: {
+                    msg: 'Email in the System!'
+                },
                 validate: {
-                    isEmail: true, //checks for email format (foo@bar.com) via validators.js & sequelize
+                    isEmail: {
+                        msg: 'The email has wrong format!'
+                    }
 
                 }
 

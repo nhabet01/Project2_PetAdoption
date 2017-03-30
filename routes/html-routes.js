@@ -173,35 +173,7 @@ router.get('/foundAnimals/:username', (req, res) => {
         }).then(function(data) {
 
             var params = data.dataValues
-            var favs;
-            /////////////////////////////////////////////////////////FAVORITES
-            db.Favorites.findAll({
-                where: {
-                    UserId: params.id
-                }
-            }).then(function(FavsData) {
-                if (FavsData.length >= 0) {
-                    //  console.log(chalk.red('FAVS'));
-                    //  console.log(FavsData);
-                    //   console.log(chalk.red('DONE'));
-                    let IDs = FavsData.map(favobject => `${favobject.animalID}`);
-                    apiMain.findfav(IDs, function(FavsDataReturn) {
-
-                        favs = FavsDataReturn
-                    })
-                } else {
-
-                    console.log('no favorites Yet')
-                }
-
-
-
-
-            })
-
-
-
-            //call findAnimals from within /routes/animalSearchFunction.js
+                //call findAnimals from within /routes/animalSearchFunction.js
             apiMain.findAminals(params, function(data) { //nh: function(data)=cb in animalSearchFunction.js
                 console.log('FUNN')
                 var userobj = {
@@ -237,36 +209,44 @@ router.post("/signup", function(req, res) {
             // console.log(hash)
 
             db.User.create({
-                    name: req.body.name,
-                    username: req.body.username,
-                    password: hash,
-                    email: req.body.email
+                name: req.body.name,
+                username: req.body.username,
+                password: hash,
+                email: req.body.email
 
 
-                }).then(function(data, err) {
-                    // console.log(data.dataValues)
-                    console.log(err)
-                    console.log('good')
+            }).then(function(data, err) {
+                // console.log(data.dataValues)
+                console.log('THIS IS AN ERROR!')
+                console.log(err)
+                console.log('good')
 
-                    // when person sigins up we authorize it
-                    //and have acces to email and username NOT password keep it hashED
-                    req.session.logged_in = true;
-                    req.session.user_name = req.body.username;
-                    req.session.user_email = req.body.email;
+                // when person sigins up we authorize it
+                //and have acces to email and username NOT password keep it hashED
+                req.session.logged_in = true;
+                req.session.user_name = req.body.username;
+                req.session.user_email = req.body.email;
 
 
-                    // we give a session token  and user has access to it during the visit until they log out! 
-                    res.redirect(`/search/${req.session.user_name}`)
-                        // res.redirect('/', data.dataValues.username)
-                })
-                .catch(function(error) {
-                    if (error) {
-                        console.log(error.message)
-                        var data = { baderror: error.message }
-                        res.render('signup', data)
+                // we give a session token  and user has access to it during the visit until they log out! 
+                res.redirect(`/search/${req.session.user_name}`)
+                    // res.redirect('/', data.dataValues.username)
+            })
+
+            .catch(function(error) {
+                if (error) {
+                    console.log(error)
+                    console.log(error.message)
+
+
+                    if (error.message.includes('Validation error:')) {
+                        error.message = error.message.slice(17)
                     }
+                    var data = { baderror: error.message }
+                    res.render('signup', data)
+                }
 
-                });
+            });
         });
     }
 

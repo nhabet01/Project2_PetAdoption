@@ -55,9 +55,12 @@ const API = {
 
         arrayOfFavs.forEach(function(element) {
             //find each pet by id and send it to array with return! 
+
             petfinder.getPet(element, {}, function(err, breeds) {
+                if (!breeds) {
 
-
+                }
+                console.log('Bugssss')
                 let pet = {
                     petPicture: breeds.media.photos['1'].x,
                     descriptsion: breeds.description,
@@ -66,9 +69,9 @@ const API = {
                     address: breeds.contact.address1,
                     petid: breeds.id, //good,passed to animalSearch.handlebars
                 };
-
-                // console.log(pet)
-                //return it
+                console.log(pet)
+                    // console.log(pet)
+                    //return it
                 ObjectMaintoCB.push(pet)
                 if (ObjectMaintoCB.length == arrayOfFavs.length) {
 
