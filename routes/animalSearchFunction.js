@@ -83,7 +83,7 @@ const API = {
                     phone: breeds.contact.phone,
                     email: breeds.contact.email,
                     address: breeds.contact.address1,
-                    petid: breeds.id, //good,passed to animalSearch.handlebars
+                    petid: breeds.id, 
                 };
                 console.log(pet)
                     // console.log(pet)
@@ -92,7 +92,7 @@ const API = {
                 if (ObjectMaintoCB.length == arrayOfFavs.length) {
 
                     console.log('boo');
-                    // send data back to routs
+                    // send data back to routes
                     cb(ObjectMaintoCB)
                 }
 
