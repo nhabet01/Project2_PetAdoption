@@ -13,8 +13,9 @@ var flash = require('express-flash');
 // Sets up the Express App
 // =============================================================
 var app = express();
-app.use(flash());
-////
+
+app.use(cookieParser());
+
 //allow sessions
 app.use(session({
     secret: 'app',
@@ -23,7 +24,9 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
-app.use(cookieParser());
+
+app.use(flash());
+
 //Deploy in current environment or 8080
 var PORT = process.env.PORT || 8080;
 

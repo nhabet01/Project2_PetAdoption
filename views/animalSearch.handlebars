@@ -38,8 +38,9 @@
         <div class="main-login main-center text-center">
 
             <h4>Animal Search for {{data.username}}</h4>
-            {{#if BadZip}}
-            <h4 class="BadPass">{{BadZip}}</h4>
+            {{!-- <p><a href="/flash">Flash</a> --}}
+            {{#if message}}
+            <h4 class="BadPass">{{message}}</h4>
             {{/if}}
             <form class="" method="POST" action="/search/{{data.username}}">
 

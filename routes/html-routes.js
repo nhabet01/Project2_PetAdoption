@@ -288,8 +288,8 @@ router.post('/search/:username', (req, res) => {
         console.log(typeof zip)
         if (newzip == null) {
             console.log("zip is invalid");
-            app.get('/addFlash', function (req, res) {
-            req.flash('info', 'Flash Message Added');
+            app.get('/addFlash', function (req, res) {//nh: router.get?
+            req.flash('error', 'INVALID ZIPCODE');
             res.redirect(`/search/${req.params.username}`)
             });
            return         
