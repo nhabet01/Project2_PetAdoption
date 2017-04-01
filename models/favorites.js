@@ -1,6 +1,6 @@
 //Sequelize Favorites model
 
-var bcrypt = require("bcrypt");
+var bcrypt = require("bcryptjs");
 var validator = require('validator');
 
 module.exports = function(sequelize, DataTypes) {

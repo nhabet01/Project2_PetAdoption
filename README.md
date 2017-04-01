@@ -88,6 +88,7 @@ Create a migration strategy for sharing data across teammembers.
 <li>Need get on Frond End and still need validation for password match on signup pahe - DZ</li>
 
 # Day 8 Group Project Sequlizer CRUD, MVC
+
 <li>Contact page </li>      
 <li>Modals for pet info initiated</li>
 <li>Delete from Favorites</li>
@@ -102,3 +103,4 @@ Create a migration strategy for sharing data across teammembers.
 <li></li>      
 <li>d</li>
 <li></li>
+

@@ -1,7 +1,7 @@
 //This code handles our API query
 const express = require("express");
 const router = express.Router();
-var petfinder = require('petfinder')('357d4a946c3d94988341843dbe6abed5', '6b28ab1dc3723180ab6a01aa0491b5fe');
+var petfinder = require('petfinder')('d9fef56b9ddab7a97e72e53d5ac6fe30', '4b44d9d627a82b811c3986f75db408f8');
 var chalk = require('chalk');
 
 const API = {
@@ -15,6 +15,7 @@ const API = {
         //Slice the first letter of the gender (M or F) as that is all that is needed to query the api 
         let animalSex = params.gender.slice(0, 1);
         let zip = params.zip;
+        console.log('DATA TO THE FIND ANIMALS')
         console.log(animalType, animalAge, animalSex, zip, params.username, params.id)
             //Difference between age and size? why is size hardcoded
 
@@ -51,55 +52,61 @@ const API = {
 
 
     },
- 
-   //reciev an array of ID's
+
+    //recieve an array of ID's
     findfav(arrayOfFavs, cb) {
 
         var ObjectMaintoCB = []
 
-        function reduceArray(array) {
-            if (array.length > 7) {
-                array.pop()
-                console.log(array)
-                reduceArray(array)
+        function reduceArray(arrayOfFavs) {
+            if (arrayOfFavs.length > 7) {
+                arrayOfFavs.pop()
+                console.log(arrayOfFavs)
+                reduceArray(arrayOfFavs)
 
             } else {
-                return reduceArray
+                return arrayOfFavs
             }
 
         }
         reduceArray(arrayOfFavs)
-        arrayOfFavs.forEach(function(element) {
+        for(i = 0; i<arrayOfFavs.length; i++) {
             //find each pet by id and send it to array with return! 
 
-            petfinder.getPet(element, {}, function(err, breeds) {
-                if (!breeds) {
+            petfinder.getPet(arrayOfFavs[i], {}, function(err, breeds) {
+                // try {
+                //     throw 'I am a tea pot and don't know how to code!'; // generates an exception
+                // } catch (e) {
+                    // statements to handle any exceptions
+                    //logMyErrors(e); // pass exception object to error handler
+                //     console.log(e)
+                // }
 
-                }
+                //===========nh: try code above is activated regardless of errors...=============
                 console.log('Bugssss')
                 let pet = {
                     petPicture: breeds.media.photos['1'].x,
-                    descriptsion: breeds.description,
+                    description: breeds.description,
                     phone: breeds.contact.phone,
                     email: breeds.contact.email,
                     address: breeds.contact.address1,
                     petid: breeds.id, //good,passed to animalSearch.handlebars
                 };
-                console.log(pet)
+               
                     // console.log(pet)
                     //return it
                 ObjectMaintoCB.push(pet)
                 if (ObjectMaintoCB.length == arrayOfFavs.length) {
 
-                    console.log('boo');
-                    // send data back to routs
+                    console.log('Favs retrieved, send to page');
+                    // send data back to routes
                     cb(ObjectMaintoCB)
                 }
 
             })
 
 
-        });
+        };
 
 
 
@@ -108,6 +115,3 @@ const API = {
 
 
 module.exports = API;
-
-
-

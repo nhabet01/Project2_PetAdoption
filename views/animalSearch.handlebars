@@ -37,7 +37,10 @@
     <div class="row main">
         <div class="main-login main-center text-center">
 
-            <h5>Animal Search for {{data.username}}</h5>
+            <h4>Animal Search for {{data.username}}</h4>
+            {{#if BadZip}}
+            <h4 class="BadPass">{{BadZip}}</h4>
+            {{/if}}
             <form class="" method="POST" action="/search/{{data.username}}">
 
                 <div class="form-group">

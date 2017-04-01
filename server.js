@@ -3,16 +3,18 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var methodOverride = require('method-override');
 //bcrypt used for validaton
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 var path = require('path')
     //cookieParser and session used for session tokens
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
+var flash = require('express-flash');
 
 // Sets up the Express App
 // =============================================================
 var app = express();
-
+app.use(flash());
+////
 //allow sessions
 app.use(session({
     secret: 'app',
@@ -44,7 +46,7 @@ app.set("view engine", "handlebars");
 
 // Routes 
 //=============================================================
-
+//////
 const HTMLRouter = require("./routes/html-routes.js");
 
 app.use('/', HTMLRouter);
@@ -52,7 +54,6 @@ app.use('/', HTMLRouter);
 // Syncing our sequelize models and then starting our express app
 
 db.sequelize.sync({ force: false }).then(function(data, error) {
-
     app.listen(PORT, function() {
         console.log("App listening on PORT " + PORT);
     });

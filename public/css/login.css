@@ -16,6 +16,7 @@
 body {
     background: url('http://wallpaper-gallery.net/images/kitty-cat-wallpapers/kitty-cat-wallpapers-0.jpg') no-repeat;
     margin: 0;
+    background-size: cover;
     /*color: #6a6f8c;
     background: #c8c8c8;*/
     background-size: cover;
